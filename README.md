@@ -10,7 +10,7 @@ editor.js
 
 ### Request
 
-react-query
+react-query+fetch
 
 ### Router
 
