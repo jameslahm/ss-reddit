@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import { Router } from "@reach/router";
-import "./App.scss";
+import "./App.css";
 import { theme, AuthContext } from "./utils";
 import { ReactQueryDevtools } from "react-query-devtools";
 import WritePost from "./components/WritePost";
