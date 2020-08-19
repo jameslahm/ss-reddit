@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./tools";
 import EditorOutput from "editorjs-react-renderer";
@@ -8,7 +8,6 @@ import {
   Textarea,
   Box,
   Flex,
-  FormControl,
   FormLabel,
   Switch,
   useTheme,

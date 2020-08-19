@@ -14,7 +14,8 @@ import { theme, AuthContext } from "./utils";
 import { ReactQueryDevtools } from "react-query-devtools";
 import EditPost from "./components/EditPost";
 import PrivateRoute from "./components/PrivateRoute";
-import Post from './components/Post'
+import Post from "./components/Post";
+import Profile from './components/Profile'
 
 function App() {
   const [authState, setAuthState] = useState(
@@ -43,6 +44,7 @@ function App() {
                 path="/edit/:id"
               ></PrivateRoute>
               <PrivateRoute component={Post} path="/post/:id"></PrivateRoute>
+              <PrivateRoute component={Profile} path="/user/:id"></PrivateRoute>
             </Router>
           </Box>
         </ColorModeProvider>

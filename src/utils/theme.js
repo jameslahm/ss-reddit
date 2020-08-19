@@ -1,4 +1,3 @@
-import React from "react";
 import { theme as defaultTheme } from "@chakra-ui/core";
 
 const fontFamily = `Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`;

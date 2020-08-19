@@ -65,7 +65,7 @@ function Header() {
         </Link>
         {authState ? (
           <>
-            <Link as={ReachLink} to="/profile">
+            <Link as={ReachLink} to={`/user/${authState.userId}`}>
               <Button variant="ghost">Profile</Button>
             </Link>
             <Button

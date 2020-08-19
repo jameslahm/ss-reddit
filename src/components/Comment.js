@@ -1,28 +1,19 @@
 import React, { useContext, useState, useRef } from "react";
 import PostPreview from "./PostPreview";
-import { useNavigate, useParams } from "@reach/router";
 import {
   AuthContext,
-  getPost,
   replyPost,
   generateToast,
   changeReply,
 } from "../utils";
-import { useQuery, queryCache } from "react-query";
+import { queryCache } from "react-query";
 import {
-  Skeleton,
   Box,
   Button,
   FormControl,
   FormErrorMessage,
   useToast,
   Flex,
-  Divider,
-  Accordion,
-  AccordionHeader,
-  AccordionItem,
-  AccordionIcon,
-  AccordionPanel,
   IconButton,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
@@ -158,6 +149,7 @@ function Comment({ comments, id, postId }) {
             .filter((comment) => comment.replyId === id)
             .map((comment) => (
               <Comment
+                key={comment.id}
                 comments={comments}
                 id={comment.id}
                 postId={postId}

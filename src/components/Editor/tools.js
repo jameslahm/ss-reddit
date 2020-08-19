@@ -34,7 +34,21 @@ const EDITOR_JS_TOOLS = {
 
 const RENDER_STYLE = {
   list: {
-    marginLeft:'2rem'
+    marginLeft: "2rem",
+  },
+  checklist: {
+    label: {
+      marginLeft: "0.5rem",
+    },
+    item: {
+      marginLeft: "0.5rem",
+    },
+  },
+  table: {
+    table: { marginLeft: "0.5rem", textAlign: "center" },
+    tr: {},
+    th: { border: "1px solid #CBD5E0" },
+    td: { border: "1px solid #CBD5E0" },
   },
 };
 
@@ -83,4 +97,4 @@ const RENDER_CONFIG = {
   },
 };
 
-export { EDITOR_JS_TOOLS, RENDER_CONFIG,RENDER_STYLE };
+export { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE };

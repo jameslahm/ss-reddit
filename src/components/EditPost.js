@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
 import {
   Box,
   FormControl,
@@ -10,9 +10,15 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/core";
-import Editor, { EDITOR_JS_TOOLS } from "./Editor";
+import Editor from "./Editor";
 import editorData from "../assets/editor.json";
-import { createPost, AuthContext, generateToast, getPost } from "../utils";
+import {
+  createPost,
+  AuthContext,
+  generateToast,
+  getPost,
+  changePost,
+} from "../utils";
 import { useMutation, useQuery } from "react-query";
 import { useParams } from "@reach/router";
 
@@ -34,7 +40,7 @@ function EditPost() {
   const [content, setContent] = useState(post.content);
   const [title, setTitle] = useState(post.title);
   const [errors, setErrors] = useState({ title: "", content: "" });
-  const [mutate] = useMutation(createPost);
+  const [mutate] = useMutation(params.id ? changePost : createPost);
   const toast = useToast();
   const editorInstanceRef = useRef(null);
 
@@ -61,6 +67,7 @@ function EditPost() {
       await mutate({
         data: { title, content: contentData },
         token: authState.jwt,
+        id: params.id,
       });
       toast(generateToast(null, `/post/${params.id}`));
     } catch (err) {

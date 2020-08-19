@@ -9,3 +9,6 @@ export * from "./api";
 export * from './toasts'
 export {PUBLIC_ROUTES}
 export {mdRender}
+
+const PAGE_SIZE=1;
+export {PAGE_SIZE}

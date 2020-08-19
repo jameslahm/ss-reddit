@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Editor from "./Editor";
-import { useTheme, Avatar, IconButton } from "@chakra-ui/core";
-import { Box, Flex, Text, Button, Divider } from "@chakra-ui/core";
+import { useTheme, Avatar, IconButton, PseudoBox } from "@chakra-ui/core";
+import { Box, Flex, Text, Divider } from "@chakra-ui/core";
 import formatDistance from "date-fns/formatDistance";
 import { FaBookmark, FaRegBookmark, FaReply } from "react-icons/fa";
 import { AuthContext } from "../utils";
@@ -19,7 +19,14 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
       borderColor="blue.500"
     >
       <Flex justifyContent="space-between" alignItems="center">
-        <Box width="max-content" display="flex" alignItems="center">
+        <PseudoBox
+          _focus={{ outline: "none" }}
+          as="button"
+          onClick={() => navigate(`/user/${post.userId}`)}
+          width="max-content"
+          display="flex"
+          alignItems="center"
+        >
           <Avatar mr={2} size="sm" name={post.nickname}></Avatar>
           <Text fontSize={"md"} mr={2}>
             {post.nickname}
@@ -27,7 +34,7 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
           <Text color="gray.400" fontSize={"sm"}>
             {formatDistance(new Date(post.updated), new Date())}
           </Text>
-        </Box>
+        </PseudoBox>
         <Box>
           {authState.nickname === post.nickname ? (
             <IconButton
@@ -49,13 +56,19 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
               icon="arrow-forward"
               size="lg"
               onClick={() => {
+                const historyPosts =
+                  JSON.parse(localStorage.getItem("history")) || [];
+                if (!historyPosts.find((p) => p.id === post.id)) {
+                  historyPosts.push(post);
+                }
+                localStorage.setItem("history", JSON.stringify(historyPosts));
                 navigate(`/post/${post.id}`);
               }}
             ></IconButton>
           ) : null}
 
           {type === "post" ? (
-            authState.bookmarks.includes(post.id) ? (
+            authState.bookmarks.find((p) => p.id === post.id) ? (
               <IconButton
                 icon={FaBookmark}
                 variant="ghost"
@@ -64,7 +77,7 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
                   setAuthStateAndSave({
                     ...authState,
                     bookmarks: authState.bookmarks.filter(
-                      (id) => id !== post.id
+                      (p) => p.id !== post.id
                     ),
                   });
                 }}
@@ -77,7 +90,7 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
                 onClick={(e) => {
                   setAuthStateAndSave({
                     ...authState,
-                    bookmarks: authState.bookmarks.concat(post.id),
+                    bookmarks: authState.bookmarks.concat(post),
                   });
                 }}
               ></IconButton>

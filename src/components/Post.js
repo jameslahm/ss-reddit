@@ -1,7 +1,13 @@
 import React, { useContext, useState, useRef } from "react";
 import PostPreview from "./PostPreview";
-import { useNavigate, useParams } from "@reach/router";
-import { AuthContext, getPost, replyPost, generateToast } from "../utils";
+import { useParams } from "@reach/router";
+import {
+  AuthContext,
+  getPost,
+  replyPost,
+  generateToast,
+  PAGE_SIZE,
+} from "../utils";
 import { useQuery } from "react-query";
 import {
   Skeleton,
@@ -16,6 +22,7 @@ import {
 import Editor from "./Editor";
 import { useMutation, queryCache } from "react-query";
 import Comment from "./Comment";
+import Paginate from "./Paginate";
 
 function Post() {
   const params = useParams();
@@ -33,9 +40,10 @@ function Post() {
   );
   const [status, setStatus] = useState("IDLE");
 
+  const [page, setPage] = useState(1);
   const [mutate] = useMutation(replyPost, {
     onSuccess: () => {
-      console.log(["post", params.id, authState.jwt])
+      console.log(["post", params.id, authState.jwt]);
       queryCache.invalidateQueries(["post", params.id, authState.jwt]);
     },
   });
@@ -65,9 +73,8 @@ function Post() {
     }
     setStatus("IDLE");
   }
-
   return isLoading ? (
-    <Skeleton mt={3} height="md"></Skeleton>
+    <Skeleton mt={3} height="xs"></Skeleton>
   ) : (
     <Box mt={3}>
       <PostPreview
@@ -107,6 +114,7 @@ function Post() {
       {post.reply
         .filter((reply) => reply.replyId === 0)
         .reverse()
+        .slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
         .map((reply) => (
           <Comment
             id={reply.id}
@@ -115,6 +123,15 @@ function Post() {
             comments={post.reply}
           ></Comment>
         ))}
+      <Flex mt={1} justifyContent="flex-end">
+        <Paginate
+          page={page}
+          setPage={setPage}
+          pageCount={Math.ceil(
+            post.reply.filter((reply) => reply.replyId === 0).length / PAGE_SIZE
+          )}
+        ></Paginate>
+      </Flex>
     </Box>
   );
 }
