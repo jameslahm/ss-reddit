@@ -11,10 +11,11 @@ import {
 import { login } from "../utils";
 import { useMutation } from "react-query";
 import { AuthContext } from "../utils";
-import { navigate } from "@reach/router";
-import { LOGIN_FAILURE, LOGIN_SUCCESS, FAILURE_TOAST } from "../utils";
+import { navigate, useLocation } from "@reach/router";
+import { generateToast } from "../utils";
 
 function LogIn() {
+  const location = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ username: "", password: "" });
@@ -31,19 +32,12 @@ function LogIn() {
       return;
     }
     try {
-      const res = await mutate({ username, password });
-      const data = await res.json();
-      if (!res.ok) {
-        throw Error(data.message);
-      }
-      setAuthStateAndSave(data);
-      toast(LOGIN_SUCCESS);
-      navigate("/");
+      const data = await mutate({ username, password }, { throwOnError: true });
+      setAuthStateAndSave({ ...data, bookmarks: [] });
+      toast(generateToast(null, "/login"));
+      navigate(location.state.from || "/");
     } catch (err) {
-      toast({
-        ...FAILURE_TOAST,
-        description: err.message,
-      });
+      toast(generateToast(err, "/login"));
     }
   }
 

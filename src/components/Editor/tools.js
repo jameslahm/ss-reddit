@@ -20,7 +20,7 @@ const EDITOR_JS_TOOLS = {
   marker: Marker,
   list: List,
   warning: Warning,
-  code: Code,
+  codeBox: Code,
   linkTool: LinkTool,
   image: Image,
   raw: Raw,
@@ -32,4 +32,55 @@ const EDITOR_JS_TOOLS = {
   simpleImage: SimpleImage,
 };
 
-export default EDITOR_JS_TOOLS;
+const RENDER_STYLE = {
+  list: {
+    marginLeft:'2rem'
+  },
+};
+
+const RENDER_CONFIG = {
+  embed: {
+    disableDefaultStyle: true,
+  },
+  table: {
+    disableDefaultStyle: true,
+  },
+  marker: {
+    disableDefaultStyle: true,
+  },
+  list: {
+    disableDefaultStyle: true,
+  },
+  warning: {
+    disableDefaultStyle: true,
+  },
+  codeBox: {
+    disableDefaultStyle: true,
+  },
+  linkTool: {
+    disableDefaultStyle: true,
+  },
+  image: {
+    disableDefaultStyle: true,
+  },
+  raw: {
+    disableDefaultStyle: true,
+  },
+  header: {
+    disableDefaultStyle: true,
+  },
+  quote: {
+    disableDefaultStyle: true,
+  },
+  checklist: {
+    disableDefaultStyle: true,
+  },
+  inlineCode: {
+    disableDefaultStyle: true,
+  },
+  simpleImage: {
+    disableDefaultStyle: true,
+  },
+};
+
+export { EDITOR_JS_TOOLS, RENDER_CONFIG,RENDER_STYLE };

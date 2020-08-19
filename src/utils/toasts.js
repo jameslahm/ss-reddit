@@ -19,5 +19,43 @@ export const LOGIN_FAILURE = {
 
 export const LOGIN_SUCCESS = {
   ...SUCCESS_TOAST,
-  description:"Login success"
+  description: "Login success",
+};
+
+export const UNAUTHORIZED_FAILURE = {
+  ...FAILURE_TOAST,
+  description: "Sorry,You need login first",
+};
+
+export const generateToast = (err, path) => {
+  if (err) {
+    switch (err.status) {
+      case 401: {
+        return UNAUTHORIZED_FAILURE;
+      }
+      case 400: {
+        if (path === "/login") {
+          return LOGIN_FAILURE;
+        }
+        break;
+      }
+      default: {
+        return {
+          ...FAILURE_TOAST,
+          description: err.message,
+        };
+      }
+    }
+  }
+  switch (path) {
+    case "/login": {
+      return LOGIN_SUCCESS;
+    }
+    default: {
+      return {
+        ...SUCCESS_TOAST,
+        description: "Success",
+      };
+    }
+  }
 };

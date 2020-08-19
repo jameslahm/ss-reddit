@@ -12,7 +12,9 @@ import { Router } from "@reach/router";
 import "./App.css";
 import { theme, AuthContext } from "./utils";
 import { ReactQueryDevtools } from "react-query-devtools";
-import WritePost from "./components/WritePost";
+import EditPost from "./components/EditPost";
+import PrivateRoute from "./components/PrivateRoute";
+import Post from './components/Post'
 
 function App() {
   const [authState, setAuthState] = useState(
@@ -33,9 +35,14 @@ function App() {
           <Header></Header>
           <Box mx="auto" maxWidth="3xl" width="100%" px={2} pb={12}>
             <Router>
-              <Home path="/"></Home>
+              <PrivateRoute component={Home} path="/"></PrivateRoute>
               <LogIn path="/login"></LogIn>
-              <WritePost path="/write"></WritePost>
+              <PrivateRoute component={EditPost} path="/edit"></PrivateRoute>
+              <PrivateRoute
+                component={EditPost}
+                path="/edit/:id"
+              ></PrivateRoute>
+              <PrivateRoute component={Post} path="/post/:id"></PrivateRoute>
             </Router>
           </Box>
         </ColorModeProvider>

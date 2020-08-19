@@ -60,7 +60,7 @@ function Header() {
         <Link as={ReachLink} to="/">
           <Button variant="ghost">Home</Button>
         </Link>
-        <Link as={ReachLink} to="/write">
+        <Link as={ReachLink} to="/edit">
           <Button variant="ghost">Post</Button>
         </Link>
         {authState ? (
