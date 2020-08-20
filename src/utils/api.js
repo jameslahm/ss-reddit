@@ -1,4 +1,4 @@
-const BASE_URL = `http://simplebbs.iterator-traits.com/api/v1`;
+const BASE_URL = `http://localhost:3000/api/proxy`;
 
 class HTTPError extends Error {
   constructor(message, status) {
