@@ -249,7 +249,6 @@ const RichText = {
 const MarkdownStyleWrapper = styled.div`
   & a {
     text-decoration: underline;
-    color: -webkit-link;
   }
   & ul {
     margin-left: 1rem;
