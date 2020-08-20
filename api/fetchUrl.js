@@ -24,7 +24,7 @@ module.exports = allowCors(async (req, res) => {
       return {
         success: 1,
         meta: {
-          title: metadata.title,
+          title: metadata.general.title,
           description: metadata.general.description,
           image: {
             url: url.resolve(req.query.url, metadata.general.icons[0].href),

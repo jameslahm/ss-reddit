@@ -15,27 +15,24 @@
 //     .processSync(content).contents;
 // };
 // console.log(mdRender("<h2>123</h2>"));
-
 var scrape = require("html-metadata");
 const url = require("url");
 
-var u = "https://ss-reddit.vercel.app/login";
-
-scrape(u)
-  .then(function (metadata) {
-    return {
-      success: 1,
-      meta: {
-        title: metadata.title,
-        description: metadata.general.description,
-        image: {
-          url: url.resolve(u, metadata.general.icons[0].href),
-        },
+scrape("https://baidu.com")
+.then(function (metadata) {
+  return {
+    success: 1,
+    meta: {
+      title: metadata.general.title,
+      description: metadata.general.description,
+      image: {
+        url: url.resolve("https://baidu.com", metadata.general.icons[0].href),
       },
-    };
-  })
-  .catch((res) => {
-    return {
-      success: 0,
-    };
-  });
+    },
+  };
+})
+.catch((res) => {
+  return {
+    success: 0,
+  };
+}).then(data=>console.log(data));

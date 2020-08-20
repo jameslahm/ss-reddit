@@ -7,12 +7,12 @@ import EditorOutput, {
   HeaderOutput,
   EmbedOutput,
   QuoteOutput,
-  ChecklistOutput,
   WarningOutput,
   TableOutput,
   DelimiterOutput,
   CodeBoxOutput,
   ParagraphOutput,
+  ChecklistOutput,
 } from "editorjs-react-renderer";
 import { css } from "@emotion/core";
 import { mdRender } from "../../utils";
@@ -25,6 +25,7 @@ import {
   Switch,
   useTheme,
   Image,
+  Checkbox,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 
@@ -180,11 +181,7 @@ const Editor = {
   Render: ({ theme, ...props }) => {
     return (
       <WrapperBox theme={theme}>
-        <Output
-          style={RENDER_STYLE}
-          config={RENDER_CONFIG}
-          {...props}
-        ></Output>
+        <Output style={RENDER_STYLE} config={RENDER_CONFIG} {...props}></Output>
       </WrapperBox>
     );
   },
@@ -227,6 +224,45 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
         const type = block.type;
         const data = block.data;
         switch (type) {
+          case "delimiter": {
+            return (
+              <DelimiterOutput
+                key={index}
+                style={style.checkBox || {}}
+                config={config.checkBox || {}}
+              ></DelimiterOutput>
+            );
+          }
+          case "quote": {
+            return (
+              <QuoteOutput
+                data={data}
+                key={index}
+                style={style.checkBox || {}}
+                config={config.checkBox || {}}
+              ></QuoteOutput>
+            );
+          }
+          case "checklist": {
+            return (
+              <ChecklistOutput
+                data={data}
+                key={index}
+                style={style.checkBox || {}}
+                config={config.checkBox || {}}
+              ></ChecklistOutput>
+            );
+          }
+          case "header": {
+            return (
+              <HeaderOutput
+                data={data}
+                key={index}
+                style={style.header || {}}
+                config={config.header || {}}
+              ></HeaderOutput>
+            );
+          }
           case "image": {
             return (
               <ImageOutput
@@ -297,7 +333,7 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
                 <Image
                   size="65px"
                   objectFit="cover"
-                  src={data.image.url}
+                  src={data.meta.image.url}
                   alt={data.title}
                 ></Image>
               </Flex>
