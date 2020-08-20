@@ -4,14 +4,10 @@ import { getPosts, AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import { Skeleton, Flex, Box, useToast } from "@chakra-ui/core";
 import PostPreview from "./PostPreview";
 import Paginate from "./Paginate.js";
-import { useLocation } from "@reach/router";
 
 function Home() {
-  const location = useLocation();
-  console.log(location);
-
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
-  const [page, setPage] = useState(location.state.page || 1);
+  const [page, setPage] = useState(1);
   const toast = useToast();
   const { data, isLoading } = useQuery(
     ["posts", PAGE_SIZE, page, authState.jwt],
@@ -43,7 +39,6 @@ function Home() {
           pageCount={Math.ceil(data.total / PAGE_SIZE)}
           page={page}
           setPage={(p) => {
-            location.state.page = p;
             setPage(p);
           }}
         ></Paginate>

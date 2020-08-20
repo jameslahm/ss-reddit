@@ -1134,11 +1134,6 @@
   resolved "https://registry.yarnpkg.com/@editorjs/checklist/-/checklist-1.1.0.tgz#1c5a083a48852f3d86d6086d2e1a6057ac5b0429"
   integrity sha512-rE0weE4iHoN6NM9GpP0XMiighGGrSyAkWWtmkRmn/2vLot3mXrh15KGaRJIP17HOW62yrOy4zJdzLEL+JyNdOg==
 
-"@editorjs/code@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/code/-/code-2.5.0.tgz#5972e4aa81be479cac17dc594358f17bcb4e5a73"
-  integrity sha512-pXUH+hkeC5nIhx+eylsde+bJ8NFvArg7iChgXOPgjwfDriE8cnevTwCc8+ALeiGspTqbZ6XSsIYAl+yJvswXww==
-
 "@editorjs/delimiter@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@editorjs/delimiter/-/delimiter-1.1.0.tgz#f61808ea92e4e289607d54441964f1cb8605410a"
@@ -1198,16 +1193,6 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@editorjs/quote/-/quote-2.3.0.tgz#5585cf93a87a1fd4e0c72ba08c90eb8eb06b518d"
   integrity sha512-B+4xEXMWiZki2EQDTJRnzMK8hNwpf7vGJtYIxfE4rOuXi5mke3xkKhrD7yPXcZYucVtCnfCVPOmFaQ3ZgiG2Qw==
-
-"@editorjs/raw@^2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@editorjs/raw/-/raw-2.1.2.tgz#fb8bcd44f38b15294d35d3859e310f878e499bbd"
-  integrity sha512-XgJkMfxcM+6jEyXzPi3kjR72XQAhWTc4dP6sV4sIhRyVAIucRULr4S6dXKtkcBf7Ci40lXqgdE9K16ggFrXVWQ==
-
-"@editorjs/simple-image@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@editorjs/simple-image/-/simple-image-1.3.3.tgz#174ac97ba1a1bea54efe20dc0aedeca3480bee42"
-  integrity sha512-a+MrzhDZ6kiMKPPlRtrTqgVTeZH1U/2OuRUzUc2zgMKDqQHiJTusWD8Dfv283DoFbXDHZBlo1ZlZ2B/4sSf2cw==
 
 "@editorjs/table@^1.2.2":
   version "1.2.2"
@@ -1320,15 +1305,6 @@
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
-
-"@fec/remark-a11y-emoji@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@fec/remark-a11y-emoji/-/remark-a11y-emoji-1.0.0.tgz#140602b3de32c0f1151634edb2f49987dbb19ca6"
-  integrity sha512-Xcd+WR6sg7CDwg2jm9snXtbMVbtf+p1eqnuqeum24AP5EYgoHmqJutaR9E0jRDigWdCqcPfarOE2ONGxQ0REQw==
-  dependencies:
-    emoji-regex "^8.0.0"
-    gemoji "^4.2.1"
-    unist-util-visit "^2.0.1"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -5387,11 +5363,6 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gemoji@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/gemoji/-/gemoji-4.2.1.tgz#88495f479a2e35a2c693e0ed321933372fc74c68"
-  integrity sha512-V9lUpRSn+KQGavZx8Pk+6mxG3kaz21ae2kTCXuT36KaRPNgYU8eHtj/RcUCNFVvmwppsYYz3nnNS9lmcP5kTsg==
-
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
@@ -5644,14 +5615,7 @@ hast-util-sanitize@^2.0.0:
   dependencies:
     xtend "^4.0.0"
 
-hast-util-sanitize@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/hast-util-sanitize/-/hast-util-sanitize-3.0.0.tgz#4cdc26b2991b3bf90ee74b5c932e14d907549312"
-  integrity sha512-gxsM24ARtuulsrWEj8QtVM6FNeAEHklF/t7TEIWvX1wuQcoAQtJtEUcT8t0os4uxCUqh1epX/gTi8fp8gNKvCA==
-  dependencies:
-    xtend "^4.0.0"
-
-hast-util-to-html@^7.0.0, hast-util-to-html@^7.1.1:
+hast-util-to-html@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/hast-util-to-html/-/hast-util-to-html-7.1.1.tgz#39818b8bbfcb8eaa87846a120b3875487b27d094"
   integrity sha512-Ujqj0hGuo3dIQKilkbauAv5teOqPvhaSLEgs1lgApFT0812e114KiffV8XfE4ttR8dRPqxNOIJOMu6SKOVOGlg==
@@ -7321,7 +7285,7 @@ lower-case@^2.0.1:
   dependencies:
     tslib "^1.10.0"
 
-lowlight@^1.10.0, lowlight@^1.2.0:
+lowlight@^1.10.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/lowlight/-/lowlight-1.14.0.tgz#83ebc143fec0f9e6c0d3deffe01be129ce56b108"
   integrity sha512-N2E7zTM7r1CwbzwspPxJvmjAbxljCPThTFawEX2Z7+P3NGrrvY54u8kyU16IY4qWfoVIxY8SYCS8jTkuG7TqYA==
@@ -7418,7 +7382,7 @@ mdast-util-definitions@^3.0.0:
   dependencies:
     unist-util-visit "^2.0.0"
 
-mdast-util-to-hast@^9.0.0, mdast-util-to-hast@^9.1.0:
+mdast-util-to-hast@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-9.1.0.tgz#6ef121dd3cd3b006bf8650b1b9454da0faf79ffe"
   integrity sha512-Akl2Vi9y9cSdr19/Dfu58PVwifPXuFt1IrHe7l+Crme1KvgUT+5z+cHLVcQVGCiNTZZcdqjnuv9vPkGsqWytWA==
@@ -9538,13 +9502,6 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-paginate@^6.3.2:
-  version "6.3.2"
-  resolved "https://registry.yarnpkg.com/react-paginate/-/react-paginate-6.3.2.tgz#4e18cbdb2654d308566775fa14df11e820188391"
-  integrity sha512-Ch++Njfv8UHpLtIMiQouAPeJQA5Ki86kIYfCer6c1B96Rvn3UF27se+goCilCP8oHNXNsA2R2kxvzanY1YIkyg==
-  dependencies:
-    prop-types "^15.6.1"
-
 react-query-devtools@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/react-query-devtools/-/react-query-devtools-2.4.2.tgz#64077b1f31c0b390b764fbabf0ba9c33ff549d1b"
@@ -9860,24 +9817,6 @@ remark-emoji@^2.1.0:
     emoticon "^3.2.0"
     node-emoji "^1.10.0"
     unist-util-visit "^2.0.2"
-
-remark-highlight.js@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/remark-highlight.js/-/remark-highlight.js-6.0.0.tgz#cb05387ddddeb078f0b61ce6299f6323f05098fc"
-  integrity sha512-eNHP/ezuDKoeh3KV+rWLeBVzU3SYVt0uu1tHdsCB6TUJYHwTNMJWZ5+nU+2fJHQXb+7PtpfGXVtFS9zk/W6qdw==
-  dependencies:
-    lowlight "^1.2.0"
-    unist-util-visit "^2.0.0"
-
-remark-html@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/remark-html/-/remark-html-12.0.0.tgz#f39d2a5e173cce777981cb4171b4ea860313d72a"
-  integrity sha512-M104NMHs48+uswChJkCDXCdabzxAinpHikpt6kS3gmGMyIvPZ5kn53tB9shFsL2O4HUJ9DIEsah1SX1Ve5FXHA==
-  dependencies:
-    hast-util-sanitize "^3.0.0"
-    hast-util-to-html "^7.0.0"
-    mdast-util-to-hast "^9.0.0"
-    xtend "^4.0.1"
 
 remark-parse@^8.0.0:
   version "8.0.3"
@@ -11452,7 +11391,7 @@ unist-util-visit-parents@^3.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
 
-unist-util-visit@^2.0.0, unist-util-visit@^2.0.1, unist-util-visit@^2.0.2:
+unist-util-visit@^2.0.0, unist-util-visit@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-2.0.3.tgz#c3703893146df47203bb8a9795af47d7b971208c"
   integrity sha512-iJ4/RczbJMkD0712mGktuGpm/U4By4FfDonL7N/9tATGIF4imikjOuagyMY53tnZq3NP6BcmlrHhEKAfGWjh7Q==

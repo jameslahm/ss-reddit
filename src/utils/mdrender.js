@@ -12,8 +12,8 @@ const mdRender = (content) => {
       .use(emoji)
       // .use(emojiA11y)
       .use(remark2rehype, { allowDangerousHtml: true })
-      .use(highlight, { ignoreMissing: true })
       .use(sanitize)
+      .use(highlight, { ignoreMissing: true })
       .use(html, { allowDangerousHtml: true })
       .processSync(content).contents
   );

@@ -28,3 +28,4 @@ react-query
 - [x] Better UX navigate post after edit
 - [x] different user check
 - [ ] better debug
+- [ ] markdown input

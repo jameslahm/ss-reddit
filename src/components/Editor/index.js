@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
 import {
@@ -28,21 +28,21 @@ import {
   Divider,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
+import ResizeTextarea from "react-textarea-autosize";
 
-// export const AutoResizeTextarea = React.forwardRef((props, ref) => {
-//   return (
-//     <Textarea
-//       minH="unset"
-//       overflow="hidden"
-//       w="100%"
-//       resize="none"
-//       ref={ref}
-//       minRows={10}
-//       as={ResizeTextarea}
-//       {...props}
-//     />
-//   );
-// });
+export const AutoResizeTextarea = React.forwardRef((props, ref) => {
+  return (
+    <Textarea
+      transition={"height none"}
+      overflow="hidden"
+      w="100%"
+      resize="none"
+      ref={ref}
+      as={ResizeTextarea}
+      {...props}
+    />
+  );
+});
 
 const WrapperBox = styled(Box)(({ theme }) => {
   return css`
@@ -246,31 +246,49 @@ const RichText = {
   Output: RichTextOutput,
 };
 
+const MarkdownStyleWrapper = styled.div`
+  & a {
+    text-decoration: underline;
+    color: -webkit-link;
+  }
+  & ul {
+    margin-left: 1rem;
+  }
+  & ol {
+    margin-left: 1rem;
+  }
+`;
+
 const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
   return isPreview ? (
     <WrapperBox theme={theme}>
-      <Box
-        minHeight="10rem"
-        p={3}
-        pt={2}
-        border="1px"
-        borderRadius="md"
-        borderColor="blue.500"
-        dangerouslySetInnerHTML={{ __html: mdRender(content) }}
-      ></Box>
+      <MarkdownStyleWrapper>
+        <Box
+          minHeight="10rem"
+          p={3}
+          pt={2}
+          border="1px"
+          borderRadius="md"
+          borderColor="blue.500"
+          dangerouslySetInnerHTML={{ __html: mdRender(content) }}
+        ></Box>
+      </MarkdownStyleWrapper>
     </WrapperBox>
   ) : (
-    <Textarea
+    <AutoResizeTextarea
       minHeight="10rem"
-      resize="vertical"
       value={content || ""}
       onChange={onChange}
-    ></Textarea>
+    ></AutoResizeTextarea>
   );
 };
 
 const MarkdownOutput = ({ content }) => {
-  return <Box dangerouslySetInnerHTML={{ __html: mdRender(content) }}></Box>;
+  return (
+    <MarkdownStyleWrapper>
+      <Box dangerouslySetInnerHTML={{ __html: mdRender(content) }}></Box>
+    </MarkdownStyleWrapper>
+  );
 };
 
 const Markdown = {
@@ -282,9 +300,16 @@ const Editor = {
   Input: React.forwardRef(
     ({ labelComponent, content, setContent, isLoading = false }, ref) => {
       const [mode, setMode] = useState(checkMode(content));
+      const checkModeRef = useRef();
+      checkModeRef.current = checkMode(content);
+      if (checkModeRef.current !== mode) {
+        console.log(checkModeRef.current);
+        setMode(checkMode(content));
+        console.log(checkModeRef.current);
+      }
       const [isPreview, setIsPreview] = useState(false);
       const theme = useTheme();
-
+      if (isPreview) console.timeEnd("Preview");
       return (
         <>
           <Flex mb={2} justifyContent="space-between" alignItems="center">
@@ -311,6 +336,7 @@ const Editor = {
                     id="is-preview"
                     value={isPreview}
                     onChange={() => {
+                      console.time("Preview");
                       setIsPreview(!isPreview);
                     }}
                   ></Switch>
@@ -319,7 +345,7 @@ const Editor = {
             </Flex>
           </Flex>
 
-          {mode === "rich-text" ? (
+          {checkModeRef.current === "rich-text" ? (
             <Box
               pt={1}
               // TODO: check height
@@ -346,7 +372,9 @@ const Editor = {
               content={content}
               isPreview={isPreview}
               theme={theme}
-              onChange={(e) => setContent(e.target.value)}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
             ></Markdown.Input>
           )}
         </>

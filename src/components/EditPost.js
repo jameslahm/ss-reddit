@@ -21,6 +21,7 @@ import {
 } from "../utils";
 import { useMutation, useQuery } from "react-query";
 import { useParams, navigate } from "@reach/router";
+import ReactDOM from "react-dom";
 
 function EditPost() {
   const params = useParams();
@@ -31,6 +32,7 @@ function EditPost() {
     (key, id, token) => getPost(id, token),
     {
       enabled: params.id,
+
       // initialData: { title: "Hell", content: JSON.stringify(editorData) },
       // initialStale: true,
       staleTime: Infinity,
@@ -40,8 +42,10 @@ function EditPost() {
         if (error.status === 401) setAuthStateAndSave(null);
       },
       onSuccess: (data) => {
-        setContent(data.content);
-        setTitle(data.title);
+        ReactDOM.unstable_batchedUpdates(() => {
+          setContent(data.content);
+          setTitle(data.title);
+        });
       },
       onSettled: (data) => {},
     }
@@ -78,10 +82,13 @@ function EditPost() {
         token: authState.jwt,
         id: params.id,
       });
-      toast(generateToast(null, `/post/${params.id}`));
-      navigate(`/post/${params.id}`);
+      toast(generateToast(null, `/post`));
+      if (params.id) navigate(`/post/${params.id}`);
+      else {
+        navigate(`/`);
+      }
     } catch (err) {
-      toast(generateToast(err, `/post/${params.id}`));
+      toast(generateToast(err, `/post`));
     }
   }
 
