@@ -25,7 +25,7 @@ function Paginate({ pageCount, page, setPage }) {
         mr={3}
         variantColor="teal"
         onClick={() => setPage(page - 1)}
-        isDisabled={page === 1}
+        isDisabled={page === 1 || pageCount===0}
       ></IconButton>
       {pageCount > 11 ? (
         <>
@@ -108,7 +108,7 @@ function Paginate({ pageCount, page, setPage }) {
         onClick={() => {
           setPage(page + 1);
         }}
-        isDisabled={page === pageCount}
+        isDisabled={page === pageCount || pageCount===0}
       ></IconButton>
     </Box>
   );

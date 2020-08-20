@@ -77,7 +77,7 @@ function EditPost() {
         setErrors({ ...errors });
         return;
       }
-      await mutate({
+      const data=await mutate({
         data: { title, content: contentData },
         token: authState.jwt,
         id: params.id,
@@ -86,7 +86,7 @@ function EditPost() {
       queryCache.invalidateQueries(["post", params.id, authState.jwt]);
       if (params.id) navigate(`/post/${params.id}`);
       else {
-        navigate(`/`);
+        navigate(`/post/${data.postId}`);
       }
     } catch (err) {
       toast(generateToast(err, `/post`));

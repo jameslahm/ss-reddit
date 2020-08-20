@@ -25,7 +25,6 @@ function Home() {
       },
     }
   );
-
   if (isLoading) {
     return (
       <Box>
