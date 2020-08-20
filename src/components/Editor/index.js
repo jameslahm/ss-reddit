@@ -303,9 +303,7 @@ const Editor = {
       const checkModeRef = useRef();
       checkModeRef.current = checkMode(content);
       if (checkModeRef.current !== mode) {
-        console.log(checkModeRef.current);
         setMode(checkMode(content));
-        console.log(checkModeRef.current);
       }
       const [isPreview, setIsPreview] = useState(false);
       const theme = useTheme();

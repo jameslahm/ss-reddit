@@ -16,6 +16,7 @@ import EditPost from "./components/EditPost";
 import PrivateRoute from "./components/PrivateRoute";
 import Post from "./components/Post";
 import Profile from "./components/Profile";
+import Footer from './components/Footer'
 
 function App() {
   const [authState, setAuthState] = useState(
@@ -34,7 +35,7 @@ function App() {
           <CSSReset></CSSReset>
           <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
           <Header></Header>
-          <Box mx="auto" maxWidth="3xl" width="100%" px={4} pb={12}>
+          <Box mx="auto" maxWidth="3xl" width="100%" px={4} pb={4}>
             <Router primary={false}>
               <PrivateRoute component={Home} path="/"></PrivateRoute>
               <LogIn path="/login"></LogIn>
@@ -47,6 +48,7 @@ function App() {
               <PrivateRoute component={Profile} path="/user/:id"></PrivateRoute>
             </Router>
           </Box>
+          <Footer></Footer>
         </ColorModeProvider>
       </ThemeProvider>
     </AuthContext.Provider>

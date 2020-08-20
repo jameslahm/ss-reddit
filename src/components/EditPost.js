@@ -19,7 +19,7 @@ import {
   getPost,
   changePost,
 } from "../utils";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, queryCache } from "react-query";
 import { useParams, navigate } from "@reach/router";
 import ReactDOM from "react-dom";
 
@@ -83,6 +83,7 @@ function EditPost() {
         id: params.id,
       });
       toast(generateToast(null, `/post`));
+      queryCache.invalidateQueries(["post", params.id, authState.jwt]);
       if (params.id) navigate(`/post/${params.id}`);
       else {
         navigate(`/`);

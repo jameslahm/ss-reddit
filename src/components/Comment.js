@@ -26,13 +26,11 @@ function Comment({ comments, id, postId }) {
 
   const [mutateReplyPost] = useMutation(replyPost, {
     onSuccess: () => {
-      console.log(["post", postId, authState.jwt]);
       queryCache.invalidateQueries(["post", postId, authState.jwt]);
     },
   });
   const [mutateEditReply] = useMutation(changeReply, {
     onSuccess: () => {
-      console.log(["post", postId, authState.jwt]);
       queryCache.invalidateQueries(["post", postId, authState.jwt]);
     },
   });

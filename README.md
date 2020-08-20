@@ -18,7 +18,7 @@ react-query
 
 ### TODO
 
-- [ ] keep page state
+- [x] keep page state
 - [x] global h1 h2 style
 - [x] editor image
 - [ ] react editor initialize bug
@@ -28,4 +28,4 @@ react-query
 - [x] Better UX navigate post after edit
 - [x] different user check
 - [ ] better debug
-- [ ] markdown input
+- [x] markdown input

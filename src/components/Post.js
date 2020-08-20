@@ -33,7 +33,7 @@ function Post() {
   const [content, setContent] = useState(null);
   const editorInstanceRef = useRef(null);
   const [errors, setErrors] = useState({ content: "" });
-  const { data: post, isLoading} = useQuery(
+  const { data: post, isLoading } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
@@ -51,7 +51,6 @@ function Post() {
   const [page, setPage] = useState(1);
   const [mutate] = useMutation(replyPost, {
     onSuccess: () => {
-      console.log(["post", params.id, authState.jwt]);
       queryCache.invalidateQueries(["post", params.id, authState.jwt]);
     },
   });
@@ -89,7 +88,10 @@ function Post() {
         <FormLabel htmlFor="only-author">Only See Author</FormLabel>
         <Switch
           value={isOnlyAuthor}
-          onChange={() => setIsOnlyAuthor(!isOnlyAuthor)}
+          onChange={() => {
+            setIsOnlyAuthor(!isOnlyAuthor);
+            setPage(1);
+          }}
         ></Switch>
       </FormControl>
       <PostPreview

@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { getPosts, AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import { Skeleton, Flex, Box, useToast } from "@chakra-ui/core";
 import PostPreview from "./PostPreview";
 import Paginate from "./Paginate.js";
+import qs from "query-string";
+import { useLocation, navigate } from "@reach/router";
 
 function Home() {
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
-  const [page, setPage] = useState(1);
+  const location = useLocation();
+  let page = parseInt(qs.parse(location.search).page || 1);
   const toast = useToast();
   const { data, isLoading } = useQuery(
     ["posts", PAGE_SIZE, page, authState.jwt],
@@ -23,28 +26,33 @@ function Home() {
     }
   );
 
-  return isLoading ? (
-    <Box>
-      <Skeleton mt={5} height="3xs"></Skeleton>
-      <Skeleton mt={5} height="3xs"></Skeleton>
-      <Skeleton mt={5} height="3xs"></Skeleton>
-    </Box>
-  ) : (
-    <Box mt={5}>
-      {data.posts.map((post) => (
-        <PostPreview key={post.id} post={post}></PostPreview>
-      ))}
-      <Flex mt={1} justifyContent="flex-end">
-        <Paginate
-          pageCount={Math.ceil(data.total / PAGE_SIZE)}
-          page={page}
-          setPage={(p) => {
-            setPage(p);
-          }}
-        ></Paginate>
-      </Flex>
-    </Box>
-  );
+  if (isLoading) {
+    return (
+      <Box>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+      </Box>
+    );
+  } else {
+    const pageCount = Math.ceil(data.total / PAGE_SIZE);
+    return (
+      <Box mt={5}>
+        {data.posts.map((post) => (
+          <PostPreview key={post.id} post={post}></PostPreview>
+        ))}
+        <Flex mt={1} justifyContent="flex-end">
+          <Paginate
+            pageCount={pageCount}
+            page={page}
+            setPage={(p) => {
+              navigate(`/?page=${p}`);
+            }}
+          ></Paginate>
+        </Flex>
+      </Box>
+    );
+  }
 }
 
 export default Home;
