@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:3000/api/proxy`;
+const BASE_URL = `https://ss-reddit.vercel.app/api/proxy`;
 
 class HTTPError extends Error {
   constructor(message, status) {
