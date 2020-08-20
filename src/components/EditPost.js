@@ -37,7 +37,7 @@ function EditPost() {
       retry: false,
       onError: (error) => {
         toast(generateToast(error, "/"));
-        setAuthStateAndSave(null);
+        if (error.status === 401) setAuthStateAndSave(null);
       },
       onSuccess: (data) => {
         setContent(data.content);
@@ -100,7 +100,7 @@ function EditPost() {
           <FormErrorMessage>{errors.title}</FormErrorMessage>
         </FormControl>
         <FormControl mt={4} isInvalid={errors.content}>
-          <Editor.Input.Component
+          <Editor.Input
             isLoading={isLoading}
             content={content}
             labelComponent={
@@ -113,7 +113,7 @@ function EditPost() {
             }
             setContent={setContent}
             ref={editorInstanceRef}
-          ></Editor.Input.Component>
+          ></Editor.Input>
           <FormErrorMessage>{errors.content}</FormErrorMessage>
         </FormControl>
         <Flex mt={4} justifyContent="flex-end">

@@ -78,7 +78,7 @@ function Profile() {
       retry: false,
       onError: (error) => {
         toast(generateToast(error, "/"));
-        setAuthStateAndSave(null);
+        if (error.status === 401)setAuthStateAndSave(null);
       },
     }
   );

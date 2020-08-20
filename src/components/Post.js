@@ -41,7 +41,7 @@ function Post() {
       retry: false,
       onError: (error) => {
         toast(generateToast(error, "/"));
-        setAuthStateAndSave(null);
+        if (error.status === 401) setAuthStateAndSave(null);
       },
     }
   );
@@ -102,12 +102,12 @@ function Post() {
       {status === "REPLY" ? (
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={errors.content}>
-            <Editor.Input.Component
+            <Editor.Input
               labelComponent={"Reply"}
               content={content}
               setContent={setContent}
               ref={editorInstanceRef}
-            ></Editor.Input.Component>
+            ></Editor.Input>
             <FormErrorMessage>{errors.content}</FormErrorMessage>
           </FormControl>
           <Flex justifyContent="flex-end" mt={2}>

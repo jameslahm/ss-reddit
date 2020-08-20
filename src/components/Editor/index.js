@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import EditorInput from "react-editor-js";
-import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./tools";
-import EditorOutput, {
+import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
+import {
   ListOutput,
   ImageOutput,
   HeaderOutput,
@@ -67,154 +67,20 @@ const WrapperBox = styled(Box)(({ theme }) => {
   `;
 });
 
-const Editor = {
-  Input: {
-    RichText: ({ theme, ...props }) => {
-      return (
-        <WrapperBox theme={theme}>
-          <EditorInput
-            // FIXME: multiple times bug
-            // enableReInitialize={true}
-            minHeight={100}
-            {...props}
-          ></EditorInput>
-        </WrapperBox>
-      );
-    },
-    Markdown: ({ content, theme, isPreview, onChange }) => {
-      return isPreview ? (
-        <WrapperBox theme={theme}>
-          <Box
-            minHeight="10rem"
-            p={3}
-            pt={2}
-            border="1px"
-            borderRadius="md"
-            borderColor="blue.500"
-            dangerouslySetInnerHTML={{ __html: mdRender(content) }}
-          ></Box>
-        </WrapperBox>
-      ) : (
-        <Textarea
-          minHeight="10rem"
-          resize="vertical"
-          value={content || ""}
-          onChange={onChange}
-        ></Textarea>
-      );
-    },
-    Component: React.forwardRef(
-      ({ labelComponent, content, setContent, isLoading = false }, ref) => {
-        const [mode, setMode] = useState(checkMode(content));
-        const [isPreview, setIsPreview] = useState(false);
-        const theme = useTheme();
-
-        return (
-          <>
-            <Flex mb={2} justifyContent="space-between" alignItems="center">
-              {labelComponent}
-              <Flex alignItems="center">
-                <FormLabel htmlFor="edit-mode">Enable Markdown Mode?</FormLabel>
-                <Switch
-                  id="edit-mode"
-                  value={mode === "markdown"}
-                  isChecked={mode === "markdown"}
-                  onChange={() => {
-                    setContent(null);
-                    if (mode === "markdown") setMode("rich-text");
-                    else {
-                      setMode("markdown");
-                    }
-                  }}
-                />
-
-                {mode === "markdown" ? (
-                  <Box ml={3}>
-                    <FormLabel htmlFor="is-preview">Preview?</FormLabel>
-                    <Switch
-                      id="is-preview"
-                      value={isPreview}
-                      onChange={() => {
-                        setIsPreview(!isPreview);
-                      }}
-                    ></Switch>
-                  </Box>
-                ) : null}
-              </Flex>
-            </Flex>
-
-            {mode === "rich-text" ? (
-              <Box
-                pt={1}
-                // TODO: check height
-                // Better UX
-                minHeight={144}
-                border="1px"
-                borderRadius="md"
-                borderColor="blue.500"
-                maxHeight={"5xl"}
-                overflow="auto"
-                px={8}
-              >
-                {isLoading ? null : (
-                  <Editor.Input.RichText
-                    theme={theme}
-                    instanceRef={(instance) => (ref.current = instance)}
-                    tools={EDITOR_JS_TOOLS}
-                    data={JSON.parse(content)}
-                  />
-                )}
-              </Box>
-            ) : (
-              <Editor.Input.Markdown
-                content={content}
-                isPreview={isPreview}
-                theme={theme}
-                onChange={(e) => setContent(e.target.value)}
-              ></Editor.Input.Markdown>
-            )}
-          </>
-        );
-      }
-    ),
-  },
-  Render: ({ theme, ...props }) => {
-    return (
-      <WrapperBox theme={theme}>
-        <Output style={RENDER_STYLE} config={RENDER_CONFIG} {...props}></Output>
-      </WrapperBox>
-    );
-  },
-  Output: ({ content, theme }) => {
-    try {
-      const data = JSON.parse(content);
-      if (data.time && data.blocks && data.version) {
-        return <Editor.Render theme={theme} data={data}></Editor.Render>;
-      }
-    } catch (err) {
-      return (
-        <Box dangerouslySetInnerHTML={{ __html: mdRender(content) }}></Box>
-      );
-    }
-    return <></>;
-  },
+const RichTextInput = ({ theme, ...props }) => {
+  return (
+    <WrapperBox theme={theme}>
+      <EditorInput
+        // FIXME: multiple times bug
+        // enableReInitialize={true}
+        minHeight={100}
+        {...props}
+      ></EditorInput>
+    </WrapperBox>
+  );
 };
 
-function checkMode(content) {
-  if (!content) {
-    return "markdown";
-  }
-  try {
-    JSON.parse(content);
-    // if (data.time && data.blocks && data.version) {
-    return "rich-text";
-    // }
-  } catch (err) {
-    return "markdown";
-  }
-}
-
-const Output = ({ style = {}, config = {}, data = {} }) => {
+const RichTextOutput = ({ style = {}, config = {}, data = {} }) => {
   if (!Array.isArray(data.blocks)) {
     return <></>;
   }
@@ -225,14 +91,13 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
         const data = block.data;
         switch (type) {
           case "delimiter": {
-            return <Divider></Divider>;
+            return <Divider key={index}></Divider>;
           }
           case "quote": {
             return (
-              <Box mb={1}>
+              <Box mb={1} key={index}>
                 <QuoteOutput
                   data={data}
-                  key={index}
                   style={style.checkBox || {}}
                   config={config.checkBox || {}}
                 ></QuoteOutput>
@@ -241,10 +106,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "checklist": {
             return (
-              <Box mb={1}>
+              <Box mb={1} key={index}>
                 <ChecklistOutput
                   data={data}
-                  key={index}
                   style={style.checklist || {}}
                   config={config.checklist || {}}
                 ></ChecklistOutput>
@@ -253,10 +117,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "header": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <HeaderOutput
                   data={data}
-                  key={index}
                   style={style.header || {}}
                   config={config.header || {}}
                 ></HeaderOutput>
@@ -265,10 +128,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "image": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <ImageOutput
                   data={data}
-                  key={index}
                   style={style.image || {}}
                   config={config.image || {}}
                 ></ImageOutput>
@@ -277,10 +139,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "embed": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <EmbedOutput
                   data={data}
-                  key={index}
                   style={style.embed || {}}
                   config={config.embed || {}}
                 ></EmbedOutput>
@@ -289,10 +150,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "table": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <TableOutput
                   data={data}
-                  key={index}
                   style={style.table || {}}
                   config={config.table || {}}
                 ></TableOutput>
@@ -301,10 +161,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "list": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <ListOutput
                   data={data}
-                  key={index}
                   style={style.list || {}}
                   config={config.list || {}}
                 ></ListOutput>
@@ -313,10 +172,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "warning": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <WarningOutput
                   data={data}
-                  key={index}
                   style={style.warning || {}}
                   config={config.warning || {}}
                 ></WarningOutput>
@@ -325,10 +183,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "codeBox": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <CodeBoxOutput
                   data={data}
-                  key={index}
                   style={style.codeBox || {}}
                   config={config.codeBox || {}}
                 ></CodeBoxOutput>
@@ -337,7 +194,7 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "linkTool": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <Link
                   _hover={{ boxShadow: "0 0 3px rgba(0,0,0, .16)" }}
                   boxShadow={"0 1px 3px rgba(0,0,0, .1)"}
@@ -367,10 +224,9 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
           }
           case "paragraph": {
             return (
-              <Box mb={1}>
+              <Box key={index} mb={1}>
                 <ParagraphOutput
                   data={data}
-                  key={index}
                   style={style.paragraph || {}}
                   config={config.paragraph || {}}
                 ></ParagraphOutput>
@@ -385,6 +241,155 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
   );
 };
 
+const RichText = {
+  Input: RichTextInput,
+  Output: RichTextOutput,
+};
+
+const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
+  return isPreview ? (
+    <WrapperBox theme={theme}>
+      <Box
+        minHeight="10rem"
+        p={3}
+        pt={2}
+        border="1px"
+        borderRadius="md"
+        borderColor="blue.500"
+        dangerouslySetInnerHTML={{ __html: mdRender(content) }}
+      ></Box>
+    </WrapperBox>
+  ) : (
+    <Textarea
+      minHeight="10rem"
+      resize="vertical"
+      value={content || ""}
+      onChange={onChange}
+    ></Textarea>
+  );
+};
+
+const MarkdownOutput = ({ content }) => {
+  return <Box dangerouslySetInnerHTML={{ __html: mdRender(content) }}></Box>;
+};
+
+const Markdown = {
+  Input: MarkdownInput,
+  Output: MarkdownOutput,
+};
+
+const Editor = {
+  Input: React.forwardRef(
+    ({ labelComponent, content, setContent, isLoading = false }, ref) => {
+      const [mode, setMode] = useState(checkMode(content));
+      const [isPreview, setIsPreview] = useState(false);
+      const theme = useTheme();
+
+      return (
+        <>
+          <Flex mb={2} justifyContent="space-between" alignItems="center">
+            {labelComponent}
+            <Flex alignItems="center">
+              <FormLabel htmlFor="edit-mode">Enable Markdown Mode?</FormLabel>
+              <Switch
+                id="edit-mode"
+                value={mode === "markdown"}
+                isChecked={mode === "markdown"}
+                onChange={() => {
+                  setContent(null);
+                  if (mode === "markdown") setMode("rich-text");
+                  else {
+                    setMode("markdown");
+                  }
+                }}
+              />
+
+              {mode === "markdown" ? (
+                <Box ml={3}>
+                  <FormLabel htmlFor="is-preview">Preview?</FormLabel>
+                  <Switch
+                    id="is-preview"
+                    value={isPreview}
+                    onChange={() => {
+                      setIsPreview(!isPreview);
+                    }}
+                  ></Switch>
+                </Box>
+              ) : null}
+            </Flex>
+          </Flex>
+
+          {mode === "rich-text" ? (
+            <Box
+              pt={1}
+              // TODO: check height
+              // Better UX
+              minHeight={144}
+              border="1px"
+              borderRadius="md"
+              borderColor="blue.500"
+              maxHeight={"5xl"}
+              overflow="auto"
+              px={8}
+            >
+              {isLoading ? null : (
+                <RichText.Input
+                  theme={theme}
+                  instanceRef={(instance) => (ref.current = instance)}
+                  tools={EDITOR_JS_TOOLS}
+                  data={JSON.parse(content)}
+                />
+              )}
+            </Box>
+          ) : (
+            <Markdown.Input
+              content={content}
+              isPreview={isPreview}
+              theme={theme}
+              onChange={(e) => setContent(e.target.value)}
+            ></Markdown.Input>
+          )}
+        </>
+      );
+    }
+  ),
+  Output: ({ content, theme }) => {
+    try {
+      const data = JSON.parse(content);
+      if (data.time && data.blocks && data.version) {
+        return (
+          <WrapperBox theme={theme}>
+            <RichText.Output
+              style={RENDER_STYLE}
+              config={RENDER_CONFIG}
+              data={data}
+            ></RichText.Output>
+          </WrapperBox>
+        );
+      }
+    } catch (err) {
+      return (
+        <WrapperBox theme={theme}>
+          <Markdown.Output content={content}></Markdown.Output>
+        </WrapperBox>
+      );
+    }
+    return <></>;
+  },
+};
+
+function checkMode(content) {
+  if (!content) {
+    return "markdown";
+  }
+  try {
+    JSON.parse(content);
+    // if (data.time && data.blocks && data.version) {
+    return "rich-text";
+    // }
+  } catch (err) {
+    return "markdown";
+  }
+}
+
 export default Editor;
-export { EDITOR_JS_TOOLS };
-export { Output };

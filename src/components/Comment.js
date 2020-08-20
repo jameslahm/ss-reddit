@@ -1,11 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import PostPreview from "./PostPreview";
-import {
-  AuthContext,
-  replyPost,
-  generateToast,
-  changeReply,
-} from "../utils";
+import { AuthContext, replyPost, generateToast, changeReply } from "../utils";
 import { queryCache } from "react-query";
 import {
   Box,
@@ -31,13 +26,13 @@ function Comment({ comments, id, postId }) {
 
   const [mutateReplyPost] = useMutation(replyPost, {
     onSuccess: () => {
-      console.log(["post", postId, authState.jwt])
+      console.log(["post", postId, authState.jwt]);
       queryCache.invalidateQueries(["post", postId, authState.jwt]);
     },
   });
   const [mutateEditReply] = useMutation(changeReply, {
     onSuccess: () => {
-      console.log(["post", postId, authState.jwt])
+      console.log(["post", postId, authState.jwt]);
       queryCache.invalidateQueries(["post", postId, authState.jwt]);
     },
   });
@@ -87,12 +82,12 @@ function Comment({ comments, id, postId }) {
   const form = (
     <form onSubmit={handleSubmit}>
       <FormControl isInvalid={errors.content}>
-        <Editor.Input.Component
+        <Editor.Input
           labelComponent={status}
           content={content}
           setContent={setContent}
           ref={editorInstanceRef}
-        ></Editor.Input.Component>
+        ></Editor.Input>
         <FormErrorMessage>{errors.content}</FormErrorMessage>
       </FormControl>
       <Flex justifyContent="flex-end" mt={2}>
