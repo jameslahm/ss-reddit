@@ -18,7 +18,8 @@ react-query+fetch
 
 ### TODO
 [] keep page state
-[] global h1 h2 style
-[] editor image
+[x] global h1 h2 style
+[x] editor image
 [] react editor initialize bug
 [] react editor render htmlFor bug
+[x] Home page auto scroll

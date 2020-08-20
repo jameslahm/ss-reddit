@@ -24,11 +24,11 @@ function PostList() {
   );
 
   return isLoading ? (
-    <>
+    <Box>
       <Skeleton mt={5} height="3xs"></Skeleton>
       <Skeleton mt={5} height="3xs"></Skeleton>
       <Skeleton mt={5} height="3xs"></Skeleton>
-    </>
+    </Box>
   ) : (
     <Box mt={5}>
       {data.posts.map((post) => (

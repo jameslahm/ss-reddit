@@ -35,7 +35,7 @@ function App() {
           <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
           <Header></Header>
           <Box mx="auto" maxWidth="3xl" width="100%" px={4} pb={12}>
-            <Router>
+            <Router primary={false}>
               <PrivateRoute component={Home} path="/"></PrivateRoute>
               <LogIn path="/login"></LogIn>
               <PrivateRoute component={EditPost} path="/edit"></PrivateRoute>
