@@ -2,11 +2,14 @@
   box-sizing: border-box;
 }
 
-
 .ce-block__content {
   max-width: 48rem;
 }
 
 .codex-editor__loader {
   height: 138px;
+}
+
+.cdx-notify--error {
+  background-color: inherit !important;
 }

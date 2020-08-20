@@ -26,7 +26,7 @@ const EDITOR_JS_TOOLS = {
   linkTool: {
     class: LinkTool,
     config: {
-      endpoint: "https://codex.so/editor/fetchUrl",
+      endpoint: "https://ss-reddit.vercel.app/api/fetchUrl",
     },
   },
   image: {
