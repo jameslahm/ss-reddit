@@ -107,8 +107,8 @@ function Profile() {
       <Tabs variant="enclosed" variantColor="teal">
         <TabList>
           <Tab>Posts</Tab>
-          <Tab isDisabled={authState.nickname !== user.nickname}>History</Tab>
-          <Tab isDisabled={authState.nickname !== user.nickname}>BookMarks</Tab>
+          <Tab isDisabled={authState.userId !== user.userId}>History</Tab>
+          <Tab isDisabled={authState.userId !== user.userId}>BookMarks</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

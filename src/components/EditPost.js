@@ -20,7 +20,7 @@ import {
   changePost,
 } from "../utils";
 import { useMutation, useQuery } from "react-query";
-import { useParams } from "@reach/router";
+import { useParams, navigate } from "@reach/router";
 
 function EditPost() {
   const params = useParams();
@@ -42,11 +42,8 @@ function EditPost() {
       onSuccess: (data) => {
         setContent(data.content);
         setTitle(data.title);
-        console.log("success");
       },
-      onSettled: (data) => {
-        console.log("Settled");
-      },
+      onSettled: (data) => {},
     }
   );
   const [content, setContent] = useState(post.content || "{}");
@@ -82,6 +79,7 @@ function EditPost() {
         id: params.id,
       });
       toast(generateToast(null, `/post/${params.id}`));
+      navigate(`/post/${params.id}`);
     } catch (err) {
       toast(generateToast(err, `/post/${params.id}`));
     }

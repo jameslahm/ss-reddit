@@ -69,13 +69,17 @@ const RENDER_STYLE = {
     },
   },
   table: {
-    table: { marginLeft: "0.5rem", textAlign: "center" },
+    table: {
+      marginLeft: "0.5rem",
+      textAlign: "center",
+      borderCollapse: "collapse",
+    },
     tr: {},
-    th: { border: "1px solid #CBD5E0" },
-    td: { border: "1px solid #CBD5E0" },
+    th: { border: "1px solid #E2E8F0", padding: "0.5rem" },
+    td: { border: "1px solid #E2E8F0", padding: "0.5rem" },
   },
-  paragraph:{
-    marginLeft:"0.5rem"
+  paragraph: {
+    marginLeft: "0.5rem",
   },
 };
 

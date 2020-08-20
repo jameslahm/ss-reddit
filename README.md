@@ -24,6 +24,7 @@ react-query
 - [ ] react editor initialize bug
 - [ ] react editor render htmlFor bug
 - [x] Home page auto scroll
-- [ ] Better code structure
-- [ ] Better UX navigate post after edit
-- [ ] different user check
+- [x] Better code structure
+- [x] Better UX navigate post after edit
+- [x] different user check
+- [ ] better debug

@@ -36,7 +36,7 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
           </Text>
         </PseudoBox>
         <Box>
-          {authState.nickname === post.nickname ? (
+          {authState.userId === post.userId ? (
             <IconButton
               variant="ghost"
               icon="edit"
