@@ -3,7 +3,10 @@
 }
 
 .ce-block__content {
-  max-width: 48rem;
+  max-width: 44rem;
+}
+.ce-toolbar__content{
+  max-width: 44rem;
 }
 
 .codex-editor__loader {

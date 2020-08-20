@@ -26,7 +26,7 @@ function EditPost() {
   const params = useParams();
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
 
-  const { isLoading } = useQuery(
+  const { data: post = {}, isLoading } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
@@ -42,12 +42,15 @@ function EditPost() {
       onSuccess: (data) => {
         setContent(data.content);
         setTitle(data.title);
+        console.log("success");
+      },
+      onSettled: (data) => {
+        console.log("Settled");
       },
     }
   );
-
-  const [content, setContent] = useState("{}");
-  const [title, setTitle] = useState("Hello");
+  const [content, setContent] = useState(post.content || "{}");
+  const [title, setTitle] = useState(post.title || "Hello");
   const [errors, setErrors] = useState({ title: "", content: "" });
   const [mutate] = useMutation(params.id ? changePost : createPost);
   const toast = useToast();

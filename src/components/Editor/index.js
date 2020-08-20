@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./tools";
-import EditorOutput from "editorjs-react-renderer";
+import EditorOutput, {
+  ListOutput,
+  ImageOutput,
+  HeaderOutput,
+  EmbedOutput,
+  QuoteOutput,
+  ChecklistOutput,
+  WarningOutput,
+  TableOutput,
+  DelimiterOutput,
+  CodeBoxOutput,
+  ParagraphOutput,
+} from "editorjs-react-renderer";
 import { css } from "@emotion/core";
 import { mdRender } from "../../utils";
 import {
+  Text,
   Textarea,
   Box,
   Flex,
   FormLabel,
   Switch,
   useTheme,
+  Image,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 
@@ -139,7 +153,7 @@ const Editor = {
                 borderColor="blue.500"
                 maxHeight={"5xl"}
                 overflow="auto"
-                px={3}
+                px={8}
               >
                 {isLoading ? null : (
                   <Editor.Input.RichText
@@ -166,11 +180,11 @@ const Editor = {
   Render: ({ theme, ...props }) => {
     return (
       <WrapperBox theme={theme}>
-        <EditorOutput
+        <Output
           style={RENDER_STYLE}
           config={RENDER_CONFIG}
           {...props}
-        ></EditorOutput>
+        ></Output>
       </WrapperBox>
     );
   },
@@ -203,5 +217,110 @@ function checkMode(content) {
   }
 }
 
+const Output = ({ style = {}, config = {}, data = {} }) => {
+  if (!Array.isArray(data.blocks)) {
+    return <></>;
+  }
+  return (
+    <>
+      {data.blocks.map((block, index) => {
+        const type = block.type;
+        const data = block.data;
+        switch (type) {
+          case "image": {
+            return (
+              <ImageOutput
+                data={data}
+                key={index}
+                style={style.image || {}}
+                config={config.image || {}}
+              ></ImageOutput>
+            );
+          }
+          case "embed": {
+            return (
+              <EmbedOutput
+                data={data}
+                key={index}
+                style={style.embed || {}}
+                config={config.embed || {}}
+              ></EmbedOutput>
+            );
+          }
+          case "table": {
+            return (
+              <TableOutput
+                data={data}
+                key={index}
+                style={style.table || {}}
+                config={config.table || {}}
+              ></TableOutput>
+            );
+          }
+          case "list": {
+            return (
+              <ListOutput
+                data={data}
+                key={index}
+                style={style.list || {}}
+                config={config.list || {}}
+              ></ListOutput>
+            );
+          }
+          case "warning": {
+            return (
+              <WarningOutput
+                data={data}
+                key={index}
+                style={style.warning || {}}
+                config={config.warning || {}}
+              ></WarningOutput>
+            );
+          }
+          case "codeBox": {
+            return (
+              <CodeBoxOutput
+                data={data}
+                key={index}
+                style={style.codeBox || {}}
+                config={config.codeBox || {}}
+              ></CodeBoxOutput>
+            );
+          }
+          case "linkTool": {
+            return (
+              <Flex>
+                <Flex flexGrow={1}>
+                  <Text>{data.meta.title}</Text>
+                  <Text>{data.meta.description}</Text>
+                </Flex>
+                <Image
+                  size="65px"
+                  objectFit="cover"
+                  src={data.image.url}
+                  alt={data.title}
+                ></Image>
+              </Flex>
+            );
+          }
+          case "paragraph": {
+            return (
+              <ParagraphOutput
+                data={data}
+                key={index}
+                style={style.paragraph || {}}
+                config={config.paragraph || {}}
+              ></ParagraphOutput>
+            );
+          }
+          default:
+            return <></>;
+        }
+      })}
+    </>
+  );
+};
+
 export default Editor;
 export { EDITOR_JS_TOOLS };
+export { Output };
