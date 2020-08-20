@@ -5,31 +5,55 @@ import Warning from "@editorjs/warning";
 import Code from "@bomdi/codebox";
 import LinkTool from "@editorjs/link";
 import Image from "@editorjs/image";
-import Raw from "@editorjs/raw";
 import Header from "@editorjs/header";
 import Quote from "@editorjs/quote";
 import Marker from "@editorjs/marker";
 import CheckList from "@editorjs/checklist";
 import Delimiter from "@editorjs/delimiter";
 import InlineCode from "@editorjs/inline-code";
-import SimpleImage from "@editorjs/simple-image";
+import { uploadImage } from "../../utils";
 
 const EDITOR_JS_TOOLS = {
-  embed: Embed,
+  embed: {
+    inlineToolbar: true,
+    class: Embed,
+  },
   table: Table,
   marker: Marker,
   list: List,
   warning: Warning,
   codeBox: Code,
-  linkTool: LinkTool,
-  image: Image,
-  raw: Raw,
+  linkTool: {
+    class: LinkTool,
+    config: {
+      endpoint: "https://codex.so/editor/fetchUrl",
+    },
+  },
+  image: {
+    class: Image,
+    config: {
+      uploader: {
+        uploadByFile(file) {
+          return uploadImage(file);
+        },
+        uploadByUrl(url) {
+          return Promise.resolve({
+            success: 1,
+            file: {
+              url: url,
+            },
+          });
+        },
+      },
+    },
+  },
+  // raw: Raw,
   header: Header,
   quote: Quote,
   checklist: CheckList,
   delimiter: Delimiter,
   inlineCode: InlineCode,
-  simpleImage: SimpleImage,
+  // simpleImage: SimpleImage,
 };
 
 const RENDER_STYLE = {
@@ -93,6 +117,9 @@ const RENDER_CONFIG = {
     disableDefaultStyle: true,
   },
   simpleImage: {
+    disableDefaultStyle: true,
+  },
+  paragraph: {
     disableDefaultStyle: true,
   },
 };

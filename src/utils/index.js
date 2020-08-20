@@ -10,5 +10,5 @@ export * from './toasts'
 export {PUBLIC_ROUTES}
 export {mdRender}
 
-const PAGE_SIZE=1;
+const PAGE_SIZE=10;
 export {PAGE_SIZE}

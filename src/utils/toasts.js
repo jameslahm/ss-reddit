@@ -1,13 +1,13 @@
 export const SUCCESS_TOAST = {
   position: "top",
-  duration: 2000,
+  duration: 3000,
   isClosable: true,
   status: "success",
 };
 
 export const FAILURE_TOAST = {
   position: "top",
-  duration: 2000,
+  duration: 3000,
   isClosable: true,
   status: "error",
 };
@@ -24,7 +24,7 @@ export const LOGIN_SUCCESS = {
 
 export const UNAUTHORIZED_FAILURE = {
   ...FAILURE_TOAST,
-  description: "Sorry,You need login first",
+  description: "Sorry,You credential has been expired,you need to re-login",
 };
 
 export const generateToast = (err, path) => {

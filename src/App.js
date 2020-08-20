@@ -15,7 +15,7 @@ import { ReactQueryDevtools } from "react-query-devtools";
 import EditPost from "./components/EditPost";
 import PrivateRoute from "./components/PrivateRoute";
 import Post from "./components/Post";
-import Profile from './components/Profile'
+import Profile from "./components/Profile";
 
 function App() {
   const [authState, setAuthState] = useState(
@@ -34,7 +34,7 @@ function App() {
           <CSSReset></CSSReset>
           <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
           <Header></Header>
-          <Box mx="auto" maxWidth="3xl" width="100%" px={2} pb={12}>
+          <Box mx="auto" maxWidth="3xl" width="100%" px={4} pb={12}>
             <Router>
               <PrivateRoute component={Home} path="/"></PrivateRoute>
               <LogIn path="/login"></LogIn>

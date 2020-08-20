@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
-import editorData from "../assets/editor.json";
+// import editorData from "../assets/editor.json";
 import {
   createPost,
   AuthContext,
@@ -24,21 +24,30 @@ import { useParams } from "@reach/router";
 
 function EditPost() {
   const params = useParams();
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuthStateAndSave } = useContext(AuthContext);
 
-  const { data: post, isFetching } = useQuery(
+  const { isLoading } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
       enabled: params.id,
-      initialData: { title: "Hello", content: JSON.stringify(editorData) },
-      initialStale: true,
+      // initialData: { title: "Hell", content: JSON.stringify(editorData) },
+      // initialStale: true,
       staleTime: Infinity,
+      retry: false,
+      onError: (error) => {
+        toast(generateToast(error, "/"));
+        setAuthStateAndSave(null);
+      },
+      onSuccess: (data) => {
+        setContent(data.content);
+        setTitle(data.title);
+      },
     }
   );
 
-  const [content, setContent] = useState(post.content);
-  const [title, setTitle] = useState(post.title);
+  const [content, setContent] = useState("{}");
+  const [title, setTitle] = useState("Hello");
   const [errors, setErrors] = useState({ title: "", content: "" });
   const [mutate] = useMutation(params.id ? changePost : createPost);
   const toast = useToast();
@@ -89,11 +98,12 @@ function EditPost() {
         </FormControl>
         <FormControl mt={4} isInvalid={errors.content}>
           <Editor.Input.Component
+            isLoading={isLoading}
             content={content}
             labelComponent={
               <FormLabel display="flex" alignItems="center" htmlFor="content">
                 Content
-                {isFetching ? (
+                {isLoading ? (
                   <Spinner ml={5} color="blue.500" size="md" />
                 ) : null}
               </FormLabel>

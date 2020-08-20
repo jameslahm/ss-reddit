@@ -104,3 +104,23 @@ export const changeReply = ({ data, token, id, replyId }) => {
     body: JSON.stringify(data),
   }).then(handleRes);
 };
+
+const IMGBB_TOKEN = "ea9ddc83d672b53c3aa2f9ae19c5ecd6";
+
+export const uploadImage = (file) => {
+  const body = new FormData();
+  body.append("key", IMGBB_TOKEN);
+  body.append("image", file);
+  return fetch(`https://api.imgbb.com/1/upload`, {
+    method: "POST",
+    body,
+  }).then((res) => {
+    if (res.ok) {
+      return res
+        .json()
+        .then((v) => ({ success: 1, file: { url: v.data.display_url } }));
+    } else {
+      return { success: 0 };
+    }
+  });
+};

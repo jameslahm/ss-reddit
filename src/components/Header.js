@@ -50,7 +50,7 @@ function Header() {
       width={"100%"}
       mx={"auto"}
       pt={16}
-      px={2}
+      px={4}
     >
       <IconButton
         icon={colorMode === "light" ? "moon" : "sun"}

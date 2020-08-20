@@ -18,6 +18,8 @@ import {
   useToast,
   Flex,
   Divider,
+  Switch,
+  FormLabel,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
 import { useMutation, queryCache } from "react-query";
@@ -27,18 +29,24 @@ import Paginate from "./Paginate";
 function Post() {
   const params = useParams();
   const toast = useToast();
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuthStateAndSave } = useContext(AuthContext);
   const [content, setContent] = useState(null);
   const editorInstanceRef = useRef(null);
   const [errors, setErrors] = useState({ content: "" });
-  const { data: post, isLoading } = useQuery(
+  const { data: post, isLoading} = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
       enabled: params.id,
+      retry: false,
+      onError: (error) => {
+        toast(generateToast(error, "/"));
+        setAuthStateAndSave(null);
+      },
     }
   );
   const [status, setStatus] = useState("IDLE");
+  const [isOnlyAuthor, setIsOnlyAuthor] = useState(false);
 
   const [page, setPage] = useState(1);
   const [mutate] = useMutation(replyPost, {
@@ -77,6 +85,13 @@ function Post() {
     <Skeleton mt={3} height="xs"></Skeleton>
   ) : (
     <Box mt={3}>
+      <FormControl mb={1}>
+        <FormLabel htmlFor="only-author">Only See Author</FormLabel>
+        <Switch
+          value={isOnlyAuthor}
+          onChange={() => setIsOnlyAuthor(!isOnlyAuthor)}
+        ></Switch>
+      </FormControl>
       <PostPreview
         post={post}
         onReply={() => {
@@ -111,7 +126,10 @@ function Post() {
         </form>
       ) : null}
       <Divider></Divider>
-      {post.reply
+      {(isOnlyAuthor
+        ? post.reply.filter((reply) => reply.userId === post.userId)
+        : post.reply
+      )
         .filter((reply) => reply.replyId === 0)
         .reverse()
         .slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
@@ -123,12 +141,15 @@ function Post() {
             comments={post.reply}
           ></Comment>
         ))}
-      <Flex mt={1} justifyContent="flex-end">
+      <Flex mt={5} justifyContent="flex-end">
         <Paginate
           page={page}
           setPage={setPage}
           pageCount={Math.ceil(
-            post.reply.filter((reply) => reply.replyId === 0).length / PAGE_SIZE
+            (isOnlyAuthor
+              ? post.reply.filter((reply) => reply.userId === post.userId)
+              : post.reply
+            ).filter((reply) => reply.replyId === 0).length / PAGE_SIZE
           )}
         ></Paginate>
       </Flex>

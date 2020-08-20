@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useParams } from "@reach/router";
-import { AuthContext, PAGE_SIZE } from "../utils";
+import { AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import {
   Box,
   Stack,
@@ -13,6 +13,7 @@ import {
   TabPanel,
   TabPanels,
   Tab,
+  useToast,
 } from "@chakra-ui/core";
 import { useQuery } from "react-query";
 import { getPosts } from "../utils";
@@ -67,11 +68,19 @@ const BookMarkPost = () => {
 function Profile() {
   const params = useParams();
   const [page, setPage] = useState(1);
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuthStateAndSave } = useContext(AuthContext);
+  const toast = useToast();
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading} = useQuery(
     ["post", PAGE_SIZE, page, params.id, authState.jwt],
-    (key, size, page, id, token) => getPosts({ size, page, userId: id }, token)
+    (key, size, page, id, token) => getPosts({ size, page, userId: id }, token),
+    {
+      retry: false,
+      onError: (error) => {
+        toast(generateToast(error, "/"));
+        setAuthStateAndSave(null);
+      },
+    }
   );
 
   if (isLoading) {
@@ -104,10 +113,9 @@ function Profile() {
         <TabPanels>
           <TabPanel>
             <Box mt={5}>
-              {data.posts
-                .map((post) => (
-                  <PostPreview key={post.id} post={post}></PostPreview>
-                ))}
+              {data.posts.map((post) => (
+                <PostPreview key={post.id} post={post}></PostPreview>
+              ))}
               <Flex mt={1} justifyContent="flex-end">
                 <Paginate
                   pageCount={Math.ceil(data.total / PAGE_SIZE)}

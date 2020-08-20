@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SS-Reddit",
+  "name": "SS-Reddit",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,14 +8,34 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo24.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "24x24"
     },
     {
-      "src": "logo512.png",
+      "src": "logo32.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "32x32"
+    },
+    {
+      "src": "logo48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "logo64.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "logo96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "logo128.png",
+      "type": "image/png",
+      "sizes": "128x128"
     }
   ],
   "start_url": ".",
