@@ -48,6 +48,7 @@ export const getPosts = (options, token) => {
     method: "GET",
     headers: {
       Authorization: token,
+      Accept:"*/*"
     },
   }).then(handleRes);
 };
