@@ -9,7 +9,6 @@ import EditorOutput, {
   QuoteOutput,
   WarningOutput,
   TableOutput,
-  DelimiterOutput,
   CodeBoxOutput,
   ParagraphOutput,
   ChecklistOutput,
@@ -25,7 +24,8 @@ import {
   Switch,
   useTheme,
   Image,
-  Checkbox,
+  Link,
+  Divider,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 
@@ -225,128 +225,156 @@ const Output = ({ style = {}, config = {}, data = {} }) => {
         const data = block.data;
         switch (type) {
           case "delimiter": {
-            return (
-              <DelimiterOutput
-                key={index}
-                style={style.checkBox || {}}
-                config={config.checkBox || {}}
-              ></DelimiterOutput>
-            );
+            return <Divider></Divider>;
           }
           case "quote": {
             return (
-              <QuoteOutput
-                data={data}
-                key={index}
-                style={style.checkBox || {}}
-                config={config.checkBox || {}}
-              ></QuoteOutput>
+              <Box mb={1}>
+                <QuoteOutput
+                  data={data}
+                  key={index}
+                  style={style.checkBox || {}}
+                  config={config.checkBox || {}}
+                ></QuoteOutput>
+              </Box>
             );
           }
           case "checklist": {
             return (
-              <ChecklistOutput
-                data={data}
-                key={index}
-                style={style.checkBox || {}}
-                config={config.checkBox || {}}
-              ></ChecklistOutput>
+              <Box mb={1}>
+                <ChecklistOutput
+                  data={data}
+                  key={index}
+                  style={style.checklist || {}}
+                  config={config.checklist || {}}
+                ></ChecklistOutput>
+              </Box>
             );
           }
           case "header": {
             return (
-              <HeaderOutput
-                data={data}
-                key={index}
-                style={style.header || {}}
-                config={config.header || {}}
-              ></HeaderOutput>
+              <Box mb={1}>
+                <HeaderOutput
+                  data={data}
+                  key={index}
+                  style={style.header || {}}
+                  config={config.header || {}}
+                ></HeaderOutput>
+              </Box>
             );
           }
           case "image": {
             return (
-              <ImageOutput
-                data={data}
-                key={index}
-                style={style.image || {}}
-                config={config.image || {}}
-              ></ImageOutput>
+              <Box mb={1}>
+                <ImageOutput
+                  data={data}
+                  key={index}
+                  style={style.image || {}}
+                  config={config.image || {}}
+                ></ImageOutput>
+              </Box>
             );
           }
           case "embed": {
             return (
-              <EmbedOutput
-                data={data}
-                key={index}
-                style={style.embed || {}}
-                config={config.embed || {}}
-              ></EmbedOutput>
+              <Box mb={1}>
+                <EmbedOutput
+                  data={data}
+                  key={index}
+                  style={style.embed || {}}
+                  config={config.embed || {}}
+                ></EmbedOutput>
+              </Box>
             );
           }
           case "table": {
             return (
-              <TableOutput
-                data={data}
-                key={index}
-                style={style.table || {}}
-                config={config.table || {}}
-              ></TableOutput>
+              <Box mb={1}>
+                <TableOutput
+                  data={data}
+                  key={index}
+                  style={style.table || {}}
+                  config={config.table || {}}
+                ></TableOutput>
+              </Box>
             );
           }
           case "list": {
             return (
-              <ListOutput
-                data={data}
-                key={index}
-                style={style.list || {}}
-                config={config.list || {}}
-              ></ListOutput>
+              <Box mb={1}>
+                <ListOutput
+                  data={data}
+                  key={index}
+                  style={style.list || {}}
+                  config={config.list || {}}
+                ></ListOutput>
+              </Box>
             );
           }
           case "warning": {
             return (
-              <WarningOutput
-                data={data}
-                key={index}
-                style={style.warning || {}}
-                config={config.warning || {}}
-              ></WarningOutput>
+              <Box mb={1}>
+                <WarningOutput
+                  data={data}
+                  key={index}
+                  style={style.warning || {}}
+                  config={config.warning || {}}
+                ></WarningOutput>
+              </Box>
             );
           }
           case "codeBox": {
             return (
-              <CodeBoxOutput
-                data={data}
-                key={index}
-                style={style.codeBox || {}}
-                config={config.codeBox || {}}
-              ></CodeBoxOutput>
+              <Box mb={1}>
+                <CodeBoxOutput
+                  data={data}
+                  key={index}
+                  style={style.codeBox || {}}
+                  config={config.codeBox || {}}
+                ></CodeBoxOutput>
+              </Box>
             );
           }
           case "linkTool": {
             return (
-              <Flex>
-                <Flex flexGrow={1}>
-                  <Text>{data.meta.title}</Text>
-                  <Text>{data.meta.description}</Text>
-                </Flex>
-                <Image
-                  size="65px"
-                  objectFit="cover"
-                  src={data.meta.image.url}
-                  alt={data.title}
-                ></Image>
-              </Flex>
+              <Box mb={1}>
+                <Link
+                  _hover={{ boxShadow: "0 0 3px rgba(0,0,0, .16)" }}
+                  boxShadow={"0 1px 3px rgba(0,0,0, .1)"}
+                  display="flex"
+                  border={"1px solid rgba(201, 201, 204, 0.48)"}
+                  borderRadius={"6px"}
+                  href={data.link}
+                  isExternal
+                  p={4}
+                >
+                  <Flex flexDirection="column" flexGrow={1}>
+                    <Text fontWeight={"600"}>{data.meta.title}</Text>
+                    <Text>{data.meta.description}</Text>
+                    <Text color="gray.500" fontSize={"xs"}>
+                      {data.link}
+                    </Text>
+                  </Flex>
+                  <Image
+                    size="65px"
+                    objectFit="cover"
+                    src={data.meta.image.url}
+                    alt={data.title}
+                  ></Image>
+                </Link>
+              </Box>
             );
           }
           case "paragraph": {
             return (
-              <ParagraphOutput
-                data={data}
-                key={index}
-                style={style.paragraph || {}}
-                config={config.paragraph || {}}
-              ></ParagraphOutput>
+              <Box mb={1}>
+                <ParagraphOutput
+                  data={data}
+                  key={index}
+                  style={style.paragraph || {}}
+                  config={config.paragraph || {}}
+                ></ParagraphOutput>
+              </Box>
             );
           }
           default:

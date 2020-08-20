@@ -74,6 +74,9 @@ const RENDER_STYLE = {
     th: { border: "1px solid #CBD5E0" },
     td: { border: "1px solid #CBD5E0" },
   },
+  paragraph:{
+    marginLeft:"0.5rem"
+  },
 };
 
 const RENDER_CONFIG = {
