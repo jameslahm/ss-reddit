@@ -51,7 +51,7 @@ function EditPost() {
       onSettled: (data) => {},
     }
   );
-  const [content, setContent] = useState(post.content || "{}");
+  const [content, setContent] = useState(post.content || '{"blocks":[]}');
   const [title, setTitle] = useState(post.title || "Hello");
   const [errors, setErrors] = useState({ title: "", content: "" });
   const [mutate] = useMutation(params.id ? changePost : createPost);

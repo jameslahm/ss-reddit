@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
 import {
@@ -74,6 +74,7 @@ const RichTextInput = ({ theme, ...props }) => {
         // FIXME: multiple times bug
         // enableReInitialize={true}
         minHeight={100}
+        logLevel={process.env.NODE_ENV === "development" ? "VERBOSE" : "ERROR"}
         {...props}
       ></EditorInput>
     </WrapperBox>
@@ -299,10 +300,9 @@ const Editor = {
   Input: React.forwardRef(
     ({ labelComponent, content, setContent, isLoading = false }, ref) => {
       const [mode, setMode] = useState(checkMode(content));
-      const checkModeRef = useRef();
-      checkModeRef.current = checkMode(content);
-      if (checkModeRef.current !== mode) {
-        setMode(checkMode(content));
+      const realMode = useMemo(() => checkMode(content), [content]);
+      if (realMode !== mode) {
+        setMode(realMode);
       }
       const [isPreview, setIsPreview] = useState(false);
       const theme = useTheme();
@@ -342,7 +342,7 @@ const Editor = {
             </Flex>
           </Flex>
 
-          {checkModeRef.current === "rich-text" ? (
+          {realMode === "rich-text" ? (
             <Box
               pt={1}
               // TODO: check height
@@ -404,17 +404,20 @@ const Editor = {
 };
 
 function checkMode(content) {
+  console.log(content);
   if (!content) {
     return "markdown";
   }
   try {
-    JSON.parse(content);
-    // if (data.time && data.blocks && data.version) {
-    return "rich-text";
-    // }
+    const data = JSON.parse(content);
+    console.log(data);
+    if (data.blocks) {
+      return "rich-text";
+    }
   } catch (err) {
     return "markdown";
   }
+  return "markdown";
 }
 
 export default Editor;
