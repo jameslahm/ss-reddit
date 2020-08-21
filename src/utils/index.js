@@ -8,5 +8,5 @@ export * from "./api";
 export * from "./toasts";
 export { mdRender };
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = process.env.NODE_ENV === "development" ? 1 : 10;
 export { PAGE_SIZE };

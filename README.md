@@ -37,3 +37,4 @@
 - [x] infinity nested comment
 - [x] update history and bookmark
 - [x] cache history and bookmark serialize
+- [ ] paginate transition better UX
