@@ -89,7 +89,7 @@ function Profile() {
 
   const user = {
     nickname: data.posts[0] ? data.posts[0].nickname : "",
-    userId: params.id,
+    userId: parseInt(params.id),
   };
 
   return (
