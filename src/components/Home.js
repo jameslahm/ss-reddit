@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery } from "react-query";
+import { useQuery, usePaginatedQuery } from "react-query";
 import { getPosts, AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import { Skeleton, Flex, Box, useToast } from "@chakra-ui/core";
 import PostPreview from "./PostPreview";
@@ -12,7 +12,7 @@ function Home() {
   const location = useLocation();
   let page = parseInt(qs.parse(location.search).page || 1);
   const toast = useToast();
-  const { data, isLoading, isError } = useQuery(
+  const { resolvedData, isLoading, isError } = usePaginatedQuery(
     ["posts", PAGE_SIZE, page, authState.jwt],
     (key, size, page, token) => {
       return getPosts({ page, size }, token);
@@ -44,10 +44,10 @@ function Home() {
       </Box>
     );
   } else {
-    const pageCount = Math.ceil(data.total / PAGE_SIZE);
+    const pageCount = Math.ceil(resolvedData.total / PAGE_SIZE);
     return (
       <Box mt={5}>
-        {data.posts.map((post) => (
+        {resolvedData.posts.map((post) => (
           <PostPreview key={post.id} post={post}></PostPreview>
         ))}
         <Flex mt={1} justifyContent="flex-end">
