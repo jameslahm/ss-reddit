@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useQuery, usePaginatedQuery } from "react-query";
+import { usePaginatedQuery } from "react-query";
 import { getPosts, AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import { Skeleton, Flex, Box, useToast } from "@chakra-ui/core";
 import PostPreview from "./PostPreview";
