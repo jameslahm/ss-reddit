@@ -16,7 +16,7 @@ import EditPost from "./components/EditPost";
 import PrivateRoute from "./components/PrivateRoute";
 import Post from "./components/Post";
 import Profile from "./components/Profile";
-import Footer from './components/Footer'
+import Footer from "./components/Footer";
 
 function App() {
   const [authState, setAuthState] = useState(

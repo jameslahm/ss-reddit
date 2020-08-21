@@ -2,19 +2,21 @@
 
 ### UI
 
-chakra-ui
+`chakra-ui`
 
 ### Write
 
-editor.js remark
+- RickText: `editor.js`
+
+- Markdown: `remark`
 
 ### Request
 
-react-query
+`react-query`
 
 ### Router
 
-@reach/router
+`@reach/router`
 
 ### TODO
 
@@ -30,4 +32,4 @@ react-query
 - [ ] better debug
 - [x] markdown input
 - [x] onError page
-- [x] infinity nested comment 
+- [x] infinity nested comment

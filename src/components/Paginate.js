@@ -25,13 +25,13 @@ function Paginate({ pageCount, page, setPage }) {
         mr={3}
         variantColor="teal"
         onClick={() => setPage(page - 1)}
-        isDisabled={page === 1 || pageCount===0}
+        isDisabled={page === 1 || pageCount === 0}
       ></IconButton>
       {pageCount > 11 ? (
         <>
           {Array.from(new Array(3).keys()).map((k) => (
             <NumberButton
-              key={k+1}
+              key={k + 1}
               onClick={() => setPage(k + 1)}
               active={k + 1 === page}
             >
@@ -44,7 +44,11 @@ function Paginate({ pageCount, page, setPage }) {
               {Array.from(new Array(3).keys()).map((k) => {
                 const n = Math.floor(page - (1 - k));
                 return (
-                  <NumberButton key={n} onClick={() => setPage(n)} active={n === page}>
+                  <NumberButton
+                    key={n}
+                    onClick={() => setPage(n)}
+                    active={n === page}
+                  >
                     {n}
                   </NumberButton>
                 );
@@ -55,7 +59,7 @@ function Paginate({ pageCount, page, setPage }) {
             <>
               {Array.from(new Array(3).keys()).map((k) => (
                 <NumberButton
-                key={k+4}
+                  key={k + 4}
                   onClick={() => setPage(k + 4)}
                   active={k + 4 === page}
                 >
@@ -70,7 +74,11 @@ function Paginate({ pageCount, page, setPage }) {
               {Array.from(new Array(3).keys()).map((k) => {
                 const n = pageCount - 3 - (2 - k);
                 return (
-                  <NumberButton key={n} onClick={() => setPage(n)} active={n === page}>
+                  <NumberButton
+                    key={n}
+                    onClick={() => setPage(n)}
+                    active={n === page}
+                  >
                     {n}
                   </NumberButton>
                 );
@@ -80,7 +88,11 @@ function Paginate({ pageCount, page, setPage }) {
           {Array.from(new Array(3).keys()).map((k) => {
             const n = pageCount - (2 - k);
             return (
-              <NumberButton key={n} onClick={() => setPage(n)} active={n === page}>
+              <NumberButton
+                key={n}
+                onClick={() => setPage(n)}
+                active={n === page}
+              >
                 {n}
               </NumberButton>
             );
@@ -92,7 +104,7 @@ function Paginate({ pageCount, page, setPage }) {
             <NumberButton
               onClick={() => setPage(k + 1)}
               active={k + 1 === page}
-              key={k+1}
+              key={k + 1}
             >
               {k + 1}
             </NumberButton>
@@ -108,7 +120,7 @@ function Paginate({ pageCount, page, setPage }) {
         onClick={() => {
           setPage(page + 1);
         }}
-        isDisabled={page === pageCount || pageCount===0}
+        isDisabled={page === pageCount || pageCount === 0}
       ></IconButton>
     </Box>
   );

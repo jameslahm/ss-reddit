@@ -30,7 +30,6 @@
     "emotion-theming": "^10.0.27",
     "html-metadata": "^1.7.1",
     "http-proxy": "^1.18.1",
-    "lodash": "^4.17.20",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -51,7 +50,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix src/**/*.{js,ts,tsx} && prettier --ignore-path .gitignore --write ./"
+  },
+  "lint-staged": {
+    "*.{js,css,json}": "prettier --check",
+    "*.{js}": [
+      "eslint --check"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -69,6 +81,11 @@
     ]
   },
   "devDependencies": {
-    "debug": "^4.1.1"
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "debug": "^4.1.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
   }
 }

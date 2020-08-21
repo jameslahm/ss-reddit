@@ -5,7 +5,7 @@
 .ce-block__content {
   max-width: 44rem;
 }
-.ce-toolbar__content{
+.ce-toolbar__content {
   max-width: 44rem;
 }
 
@@ -17,7 +17,8 @@
   background-color: inherit !important;
 }
 
-html,body{
+html,
+body {
   height: 100%;
   width: 100%;
 }

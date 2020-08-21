@@ -42,7 +42,7 @@ export const generateToast = (err, path) => {
       default: {
         return {
           ...FAILURE_TOAST,
-          description: err.message+", Please check your network and refresh",
+          description: err.message + ", Please check your network and refresh",
         };
       }
     }
