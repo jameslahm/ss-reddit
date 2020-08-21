@@ -35,3 +35,4 @@
 - [x] markdown input
 - [x] onError page
 - [x] infinity nested comment
+- [ ] update history and bookmark
