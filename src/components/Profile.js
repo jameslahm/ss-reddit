@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { useParams } from "@reach/router";
 import { AuthContext, PAGE_SIZE, generateToast } from "../utils";
 import {
@@ -22,10 +22,16 @@ import Paginate from "./Paginate";
 
 const HistoryPost = () => {
   const [page, setPage] = useState(1);
-  const historyPosts = JSON.parse(localStorage.getItem("history")) || [];
+  const { current: historyPosts } = useRef(
+    JSON.parse(localStorage.getItem("history")) || []
+  );
+  const { current: cachedPosts } = useRef(
+    JSON.parse(localStorage.getItem("cachedPosts")) || {}
+  );
   return (
     <Box mt={5}>
       {historyPosts
+        .map((id) => cachedPosts[id])
         .reverse()
         .slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
         .map((post) => (
@@ -45,10 +51,14 @@ const HistoryPost = () => {
 const BookMarkPost = () => {
   const { authState } = useContext(AuthContext);
   const [page, setPage] = useState(1);
-  const posts = authState.bookmarks;
+  const { current: cachedPosts } = useRef(
+    JSON.parse(localStorage.getItem("cachedPosts")) || {}
+  );
+  const postsId = authState.bookmarks;
   return (
     <Box mt={5}>
-      {posts
+      {postsId
+        .map((id) => cachedPosts[id])
         .reverse()
         .slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
         .map((post) => (
@@ -56,7 +66,7 @@ const BookMarkPost = () => {
         ))}
       <Flex mt={1} justifyContent="flex-end">
         <Paginate
-          pageCount={Math.ceil(posts.length / PAGE_SIZE)}
+          pageCount={Math.ceil(postsId.length / PAGE_SIZE)}
           page={page}
           setPage={setPage}
         ></Paginate>

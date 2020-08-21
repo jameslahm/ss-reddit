@@ -56,19 +56,13 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
               icon="arrow-forward"
               size="lg"
               onClick={() => {
-                const historyPosts =
-                  JSON.parse(localStorage.getItem("history")) || [];
-                if (!historyPosts.find((p) => p.id === post.id)) {
-                  historyPosts.push(post);
-                }
-                localStorage.setItem("history", JSON.stringify(historyPosts));
                 navigate(`/post/${post.id}`);
               }}
             ></IconButton>
           ) : null}
 
           {type === "post" ? (
-            authState.bookmarks.find((p) => p.id === post.id) ? (
+            authState.bookmarks.includes(post.id) ? (
               <IconButton
                 icon={FaBookmark}
                 variant="ghost"
@@ -77,7 +71,7 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
                   setAuthStateAndSave({
                     ...authState,
                     bookmarks: authState.bookmarks.filter(
-                      (p) => p.id !== post.id
+                      (id) => id !== post.id
                     ),
                   });
                 }}
@@ -88,9 +82,16 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
                 variant="ghost"
                 size="lg"
                 onClick={(e) => {
+                  const cachedPosts =
+                    JSON.parse(localStorage.getItem("cachedPosts")) || {};
+                  cachedPosts[post.id] = post;
+                  localStorage.setItem(
+                    "cachedPosts",
+                    JSON.stringify(cachedPosts)
+                  );
                   setAuthStateAndSave({
                     ...authState,
-                    bookmarks: authState.bookmarks.concat(post),
+                    bookmarks: authState.bookmarks.concat(post.id),
                   });
                 }}
               ></IconButton>

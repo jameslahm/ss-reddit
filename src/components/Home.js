@@ -23,6 +23,16 @@ function Home() {
         toast(generateToast(error, "/"));
         if (error.status === 401) setAuthStateAndSave(null);
       },
+      onSuccess: (data) => {
+        const cachedPosts =
+          JSON.parse(localStorage.getItem("cachedPosts")) || {};
+        data.posts.forEach((v) => {
+          if (cachedPosts[v.id]) {
+            cachedPosts[v.id] = v;
+          }
+        });
+        localStorage.setItem("cachedPosts", JSON.stringify(cachedPosts));
+      },
     }
   );
   if (isLoading || isError) {

@@ -43,8 +43,22 @@ function Post() {
         toast(generateToast(error, "/"));
         if (error.status === 401) setAuthStateAndSave(null);
       },
+      onSuccess: (data) => {
+        const cachedPosts =
+          JSON.parse(localStorage.getItem("cachedPosts")) || {};
+        const historyPosts = JSON.parse(localStorage.getItem("history")) || [];
+        if (!historyPosts.includes(data.id)) {
+          historyPosts.push(data.id);
+          cachedPosts[data.id] = data;
+        } else {
+          cachedPosts[data.id] = data;
+        }
+        localStorage.setItem("history", JSON.stringify(historyPosts));
+        localStorage.setItem("cachedPosts", JSON.stringify(cachedPosts));
+      },
     }
   );
+
   const [status, setStatus] = useState("IDLE");
   const [isOnlyAuthor, setIsOnlyAuthor] = useState(false);
 
