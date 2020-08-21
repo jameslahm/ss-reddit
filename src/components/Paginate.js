@@ -2,7 +2,11 @@ import React from "react";
 import { Button, Box, Text, IconButton } from "@chakra-ui/core";
 
 const BreakLine = () => {
-  return <Text display="inline-block">...</Text>;
+  return (
+    <Text mr={1} display="inline-block">
+      ...
+    </Text>
+  );
 };
 
 const NumberButton = ({ active = null, ...props }) => {
@@ -38,7 +42,7 @@ function Paginate({ pageCount, page, setPage }) {
               {k + 1}
             </NumberButton>
           ))}
-          {page >= 7 && page <= pageCount - 6 ? (
+          {page >= 5 && page <= pageCount - 4 ? (
             <>
               <BreakLine>...</BreakLine>
               {Array.from(new Array(3).keys()).map((k) => {
@@ -55,7 +59,7 @@ function Paginate({ pageCount, page, setPage }) {
               })}
               <BreakLine>...</BreakLine>
             </>
-          ) : page < 7 ? (
+          ) : page < 5 ? (
             <>
               {Array.from(new Array(3).keys()).map((k) => (
                 <NumberButton
@@ -68,7 +72,7 @@ function Paginate({ pageCount, page, setPage }) {
               ))}
               <BreakLine>...</BreakLine>
             </>
-          ) : page > pageCount - 6 ? (
+          ) : page > pageCount - 4 ? (
             <>
               <BreakLine>...</BreakLine>
               {Array.from(new Array(3).keys()).map((k) => {
