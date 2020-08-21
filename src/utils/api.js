@@ -1,4 +1,7 @@
-const BASE_URL = `https://ss-reddit.vercel.app/api/proxy`;
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? `http://simplebbs.iterator-traits.com/api/v1`
+    : `https://ss-reddit.vercel.app/api/proxy`;
 
 class HTTPError extends Error {
   constructor(message, status) {
@@ -48,7 +51,7 @@ export const getPosts = (options, token) => {
     method: "GET",
     headers: {
       Authorization: token,
-      Accept:"*/*"
+      Accept: "*/*",
     },
   }).then(handleRes);
 };

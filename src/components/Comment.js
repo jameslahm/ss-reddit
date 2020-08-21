@@ -105,9 +105,10 @@ function Comment({ comments, id, postId }) {
   );
 
   return (
-    <Box mt={3}>
+    <Box mt={3} minWidth="xs">
       <Flex alignItems="center">
         <IconButton
+          ml={1}
           variant="ghost"
           icon={isOpen ? "chevron-up" : "chevron-down"}
           onClick={() => {

@@ -9,6 +9,7 @@ import {
   Flex,
   useToast,
   Spinner,
+  Skeleton,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
 // import editorData from "../assets/editor.json";
@@ -27,7 +28,7 @@ function EditPost() {
   const params = useParams();
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
 
-  const { data: post = {}, isLoading } = useQuery(
+  const { data: post = {}, isLoading, isError } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
@@ -77,7 +78,7 @@ function EditPost() {
         setErrors({ ...errors });
         return;
       }
-      const data=await mutate({
+      const data = await mutate({
         data: { title, content: contentData },
         token: authState.jwt,
         id: params.id,
@@ -91,6 +92,16 @@ function EditPost() {
     } catch (err) {
       toast(generateToast(err, `/post`));
     }
+  }
+
+  if (isError) {
+    return (
+      <Box>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={5} height="3xs"></Skeleton>
+      </Box>
+    );
   }
 
   return (

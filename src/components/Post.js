@@ -33,7 +33,7 @@ function Post() {
   const [content, setContent] = useState(null);
   const editorInstanceRef = useRef(null);
   const [errors, setErrors] = useState({ content: "" });
-  const { data: post, isLoading } = useQuery(
+  const { data: post, isLoading, isError } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
@@ -80,7 +80,7 @@ function Post() {
     }
     setStatus("IDLE");
   }
-  return isLoading ? (
+  return isLoading || isError ? (
     <Skeleton mt={3} height="xs"></Skeleton>
   ) : (
     <Box mt={3}>
@@ -128,21 +128,23 @@ function Post() {
         </form>
       ) : null}
       <Divider></Divider>
-      {(isOnlyAuthor
-        ? post.reply.filter((reply) => reply.userId === post.userId)
-        : post.reply
-      )
-        .filter((reply) => reply.replyId === 0)
-        .reverse()
-        .slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
-        .map((reply) => (
-          <Comment
-            id={reply.id}
-            key={reply.id}
-            postId={params.id}
-            comments={post.reply}
-          ></Comment>
-        ))}
+      <Box overflow="auto">
+        {(isOnlyAuthor
+          ? post.reply.filter((reply) => reply.userId === post.userId)
+          : post.reply
+        )
+          .filter((reply) => reply.replyId === 0)
+          .reverse()
+          .slice(PAGE_SIZE * (page - 1), PAGE_SIZE * page)
+          .map((reply) => (
+            <Comment
+              id={reply.id}
+              key={reply.id}
+              postId={params.id}
+              comments={post.reply}
+            ></Comment>
+          ))}
+      </Box>
       <Flex mt={5} justifyContent="flex-end">
         <Paginate
           page={page}

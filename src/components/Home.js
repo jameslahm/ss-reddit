@@ -12,7 +12,7 @@ function Home() {
   const location = useLocation();
   let page = parseInt(qs.parse(location.search).page || 1);
   const toast = useToast();
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, isError } = useQuery(
     ["posts", PAGE_SIZE, page, authState.jwt],
     (key, size, page, token) => {
       return getPosts({ page, size }, token);
@@ -25,7 +25,7 @@ function Home() {
       },
     }
   );
-  if (isLoading) {
+  if (isLoading || isError) {
     return (
       <Box>
         <Skeleton mt={5} height="3xs"></Skeleton>

@@ -71,19 +71,19 @@ function Profile() {
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
   const toast = useToast();
 
-  const { data, isLoading} = useQuery(
+  const { data, isLoading, isError } = useQuery(
     ["post", PAGE_SIZE, page, params.id, authState.jwt],
     (key, size, page, id, token) => getPosts({ size, page, userId: id }, token),
     {
       retry: false,
       onError: (error) => {
         toast(generateToast(error, "/"));
-        if (error.status === 401)setAuthStateAndSave(null);
+        if (error.status === 401) setAuthStateAndSave(null);
       },
     }
   );
 
-  if (isLoading) {
+  if (isLoading || isError) {
     return <Skeleton mt={8} height="md"></Skeleton>;
   }
 

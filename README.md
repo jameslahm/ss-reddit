@@ -29,4 +29,5 @@ react-query
 - [x] different user check
 - [ ] better debug
 - [x] markdown input
-- [ ] onError page
+- [x] onError page
+- [x] infinity nested comment 
