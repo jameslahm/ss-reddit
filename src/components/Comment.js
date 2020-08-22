@@ -105,7 +105,7 @@ function Comment({ comments, id, postId }) {
   );
 
   return (
-    <Box mt={3} minWidth="md">
+    <Box mt={3} minWidth="29rem">
       <Flex alignItems="center">
         <IconButton
           variant="ghost"
@@ -117,7 +117,7 @@ function Comment({ comments, id, postId }) {
           ml={2}
         ></IconButton>
         {status === "EDIT" ? (
-          <Box flexGrow={1} py={"px"}>
+          <Box flexGrow={1} px={"px"}>
             {form}
           </Box>
         ) : (
@@ -130,7 +130,17 @@ function Comment({ comments, id, postId }) {
                 setStatus("REPLY");
               }}
               onEdit={() => {
-                setContent(comment.content);
+                try {
+                  const res = JSON.parse(comment.content);
+                  if (res.blocks && res.version && res.time) {
+                    setContent(res);
+                  } else {
+                    setContent(comment.content);
+                  }
+                } catch {
+                  setContent(comment.content);
+                }
+                // setContent(comment.content);
                 setStatus("EDIT");
               }}
             ></PostPreview>
