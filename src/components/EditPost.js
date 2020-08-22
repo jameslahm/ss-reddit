@@ -29,7 +29,10 @@ function EditPost() {
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
 
   const {
-    data: post = { title: "Hello", content: RichText.INITIAL_DATA },
+    data: post = {
+      title: "Hello",
+      content: JSON.stringify(RichText.INITIAL_DATA),
+    },
     isLoading,
     isError,
   } = useQuery(
@@ -64,7 +67,19 @@ function EditPost() {
       onSettled: (data) => {},
     }
   );
-  const [content, setContent] = useState(post.content);
+  // Lazy State
+  const [content, setContent] = useState(() => {
+    try {
+      const res = JSON.parse(post.content);
+      if (res.blocks && res.version && res.time) {
+        return res;
+      } else {
+        return post.content;
+      }
+    } catch {
+      return post.content;
+    }
+  });
   const [title, setTitle] = useState(post.title);
   const [errors, setErrors] = useState({ title: "", content: "" });
   const [mutate] = useMutation(params.id ? changePost : createPost);
