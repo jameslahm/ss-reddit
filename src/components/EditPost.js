@@ -97,15 +97,13 @@ function EditPost() {
   if (isError) {
     return (
       <Box>
-        <Skeleton mt={5} height="3xs"></Skeleton>
-        <Skeleton mt={5} height="3xs"></Skeleton>
-        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={2} height="xs"></Skeleton>
       </Box>
     );
   }
 
   return (
-    <Box mt={12} maxWidth="3xl" width="100%" mx="auto">
+    <Box mt={4} maxWidth="3xl" width="100%" mx="auto">
       <form onSubmit={handleSubmit}>
         <FormControl isInvalid={errors.title}>
           <FormLabel htmlFor="title">Title</FormLabel>
