@@ -53,7 +53,11 @@ function EditPost() {
         ReactDOM.unstable_batchedUpdates(() => {
           try {
             const res = JSON.parse(data.content);
-            if (res.blocks && res.version && res.time) {
+            if (
+              Array.isArray(res.blocks) &&
+              typeof res.version === "string" &&
+              typeof res.time === "number"
+            ) {
               setContent(res);
             } else {
               setContent(data.content);
@@ -71,7 +75,11 @@ function EditPost() {
   const [content, setContent] = useState(() => {
     try {
       const res = JSON.parse(post.content);
-      if (res.blocks && res.version && res.time) {
+      if (
+        Array.isArray(res.blocks) &&
+        typeof res.version === "string" &&
+        typeof res.time === "number"
+      ) {
         return res;
       } else {
         return post.content;

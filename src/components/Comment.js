@@ -132,7 +132,11 @@ function Comment({ comments, id, postId }) {
               onEdit={() => {
                 try {
                   const res = JSON.parse(comment.content);
-                  if (res.blocks && res.version && res.time) {
+                  if (
+                    Array.isArray(res.blocks) &&
+                    typeof res.version === "string" &&
+                    typeof res.time === "number"
+                  ) {
                     setContent(res);
                   } else {
                     setContent(comment.content);
