@@ -38,15 +38,15 @@ function Home() {
   if (isLoading || isError) {
     return (
       <Box>
-        <Skeleton mt={5} height="3xs"></Skeleton>
-        <Skeleton mt={5} height="3xs"></Skeleton>
-        <Skeleton mt={5} height="3xs"></Skeleton>
+        <Skeleton mt={2} height="3xs"></Skeleton>
+        <Skeleton mt={2} height="3xs"></Skeleton>
+        <Skeleton mt={2} height="3xs"></Skeleton>
       </Box>
     );
   } else {
     const pageCount = Math.ceil(data.total / PAGE_SIZE);
     return (
-      <Box mt={5}>
+      <Box mt={2}>
         {data.posts.map((post) => (
           <PostPreview key={post.id} post={post}></PostPreview>
         ))}

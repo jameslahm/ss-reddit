@@ -35,7 +35,7 @@ function App() {
           <CSSReset></CSSReset>
           <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
           <Header></Header>
-          <Box mx="auto" maxWidth="3xl" width="100%" px={4} pb={4}>
+          <Box role="main" mx="auto" maxWidth="3xl" width="100%" px={4} pb={4}>
             <Router primary={false}>
               <PrivateRoute component={Home} path="/"></PrivateRoute>
               <LogIn path="/login"></LogIn>

@@ -7,6 +7,7 @@ import {
   Flex,
   useColorMode,
 } from "@chakra-ui/core";
+import styled from "@emotion/styled";
 import { Link as ReachLink } from "@reach/router";
 import { AuthContext } from "../utils";
 
@@ -38,19 +39,34 @@ const Button = React.forwardRef((props, ref) => {
   );
 });
 
+const StickyNav = styled(Flex)`
+  backdrop-filter: saturate(180%) blur(20px);
+  z-index: 10;
+  top: 0;
+`;
+
 function Header() {
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const headerBgColor = {
+    light: "rgb(255,255,255,0.8)",
+    dark: "rgba(26, 32, 44,0.8)",
+  };
+
   return (
-    <Flex
+    <StickyNav
       justifyContent="space-between"
       as="header"
       maxWidth="3xl"
       width={"100%"}
       mx={"auto"}
-      pt={16}
+      pt={8}
       px={4}
+      mt={4}
+      pb={4}
+      position="sticky"
+      bg={headerBgColor[colorMode]}
     >
       <IconButton
         icon={colorMode === "light" ? "moon" : "sun"}
@@ -83,7 +99,7 @@ function Header() {
           </Link>
         )}
       </Flex>
-    </Flex>
+    </StickyNav>
   );
 }
 

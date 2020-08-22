@@ -94,7 +94,7 @@ function Profile() {
   );
 
   if (isLoading || isError) {
-    return <Skeleton mt={8} height="md"></Skeleton>;
+    return <Skeleton mt={3} height="md"></Skeleton>;
   }
 
   const user = {
@@ -104,7 +104,7 @@ function Profile() {
 
   return (
     <Stack spacing={8}>
-      <Flex mt={8} alignItems="center">
+      <Flex mt={4} alignItems="center">
         <Avatar size="lg" name={user.nickname}></Avatar>
         <Box ml={4}>
           <Text>{user.nickname}</Text>
