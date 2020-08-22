@@ -18,7 +18,7 @@ function Comment({ comments, id, postId }) {
   const comment = comments.find((comment) => comment.id === id);
   const toast = useToast();
   const { authState } = useContext(AuthContext);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState("");
   const editorInstanceRef = useRef(null);
   const [errors, setErrors] = useState({ content: "" });
   const [status, setStatus] = useState("IDLE");
@@ -105,26 +105,28 @@ function Comment({ comments, id, postId }) {
   );
 
   return (
-    <Box mt={3} minWidth="xs">
+    <Box mt={3} minWidth="md">
       <Flex alignItems="center">
         <IconButton
-          ml={1}
           variant="ghost"
           icon={isOpen ? "chevron-up" : "chevron-down"}
           onClick={() => {
             setIsOpen(!isOpen);
           }}
           mr={2}
+          ml={2}
         ></IconButton>
         {status === "EDIT" ? (
-          <Box flexGrow={1}>{form}</Box>
+          <Box flexGrow={1} py={"px"}>
+            {form}
+          </Box>
         ) : (
           <Box flexGrow={1}>
             <PostPreview
               type="comment"
               post={comment}
               onReply={() => {
-                setContent(null);
+                setContent("");
                 setStatus("REPLY");
               }}
               onEdit={() => {
@@ -135,7 +137,7 @@ function Comment({ comments, id, postId }) {
           </Box>
         )}
       </Flex>
-      {status === "REPLY" ? form : null}
+      {status === "REPLY" ? <Box px={"px"}>{form}</Box> : null}
       {/* <Divider></Divider> */}
       {isOpen ? (
         <Box ml={12}>

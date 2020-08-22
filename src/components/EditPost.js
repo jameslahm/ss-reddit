@@ -11,7 +11,7 @@ import {
   Spinner,
   Skeleton,
 } from "@chakra-ui/core";
-import Editor from "./Editor";
+import Editor, { RichText } from "./Editor";
 // import editorData from "../assets/editor.json";
 import {
   createPost,
@@ -28,7 +28,11 @@ function EditPost() {
   const params = useParams();
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
 
-  const { data: post = {}, isLoading, isError } = useQuery(
+  const {
+    data: post = { title: "Hello", content: RichText.INITIAL_DATA },
+    isLoading,
+    isError,
+  } = useQuery(
     ["post", params.id, authState.jwt],
     (key, id, token) => getPost(id, token),
     {
@@ -44,15 +48,24 @@ function EditPost() {
       },
       onSuccess: (data) => {
         ReactDOM.unstable_batchedUpdates(() => {
-          setContent(data.content);
+          try {
+            const res = JSON.parse(data.content);
+            if (res.blocks && res.version && res.time) {
+              setContent(res);
+            } else {
+              setContent(data.content);
+            }
+          } catch {
+            setContent(data.content);
+          }
           setTitle(data.title);
         });
       },
       onSettled: (data) => {},
     }
   );
-  const [content, setContent] = useState(post.content || '{"blocks":[]}');
-  const [title, setTitle] = useState(post.title || "Hello");
+  const [content, setContent] = useState(post.content);
+  const [title, setTitle] = useState(post.title);
   const [errors, setErrors] = useState({ title: "", content: "" });
   const [mutate] = useMutation(params.id ? changePost : createPost);
   const toast = useToast();

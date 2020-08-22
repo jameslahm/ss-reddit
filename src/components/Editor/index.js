@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
 import {
@@ -245,6 +245,7 @@ const RichTextOutput = ({ style = {}, config = {}, data = {} }) => {
 const RichText = {
   Input: RichTextInput,
   Output: RichTextOutput,
+  INITIAL_DATA: { blocks: [], time: 0, version: "0" },
 };
 
 const MarkdownStyleWrapper = styled.div`
@@ -264,7 +265,7 @@ const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
     <WrapperBox theme={theme}>
       <MarkdownStyleWrapper>
         <Box
-          minHeight="10rem"
+          minHeight="9rem"
           p={3}
           pt={2}
           border="1px"
@@ -276,7 +277,7 @@ const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
     </WrapperBox>
   ) : (
     <AutoResizeTextarea
-      minHeight="10rem"
+      minHeight="9rem"
       value={content || ""}
       onChange={onChange}
     ></AutoResizeTextarea>
@@ -294,23 +295,29 @@ const MarkdownOutput = ({ content }) => {
 const Markdown = {
   Input: MarkdownInput,
   Output: MarkdownOutput,
+  INITIAL_DATA: "",
 };
 
 const Editor = {
   Input: React.forwardRef(
     ({ labelComponent, content, setContent, isLoading = false }, ref) => {
+      // check mode for the first time ,default value
       const [mode, setMode] = useState(checkMode(content));
-      const realMode = useMemo(() => checkMode(content), [content]);
-      if (realMode !== mode) {
-        setMode(realMode);
-      }
+      useEffect(() => {
+        const realMode = checkMode(content);
+        if (realMode !== mode) {
+          setMode(realMode);
+        }
+        // Here we only update post content when the request resolved
+        // So only need to check once when isLoading trus to be false
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [isLoading]);
       const [isPreview, setIsPreview] = useState(false);
       const theme = useTheme();
-      if (isPreview) console.timeEnd("Preview");
       return (
         <>
-          <Flex mb={2} justifyContent="space-between" alignItems="center">
-            {labelComponent}
+          <Flex mb={2} justifyContent="space-between" alignItems="baseline">
+            <Text>{labelComponent}</Text>
             <Flex alignItems="center">
               <FormLabel htmlFor="edit-mode">Enable Markdown Mode?</FormLabel>
               <Switch
@@ -318,10 +325,12 @@ const Editor = {
                 value={mode === "markdown"}
                 isChecked={mode === "markdown"}
                 onChange={() => {
-                  setContent(null);
-                  if (mode === "markdown") setMode("rich-text");
-                  else {
+                  if (mode === "markdown") {
+                    setMode("rich-text");
+                    setContent(RichText.INITIAL_DATA);
+                  } else {
                     setMode("markdown");
+                    setContent(Markdown.INITIAL_DATA);
                   }
                 }}
               />
@@ -333,7 +342,6 @@ const Editor = {
                     id="is-preview"
                     value={isPreview}
                     onChange={() => {
-                      console.time("Preview");
                       setIsPreview(!isPreview);
                     }}
                   ></Switch>
@@ -342,7 +350,7 @@ const Editor = {
             </Flex>
           </Flex>
 
-          {realMode === "rich-text" ? (
+          {mode === "rich-text" ? (
             <Box
               pt={1}
               // TODO: check height
@@ -360,7 +368,7 @@ const Editor = {
                   theme={theme}
                   instanceRef={(instance) => (ref.current = instance)}
                   tools={EDITOR_JS_TOOLS}
-                  data={JSON.parse(content)}
+                  data={content}
                 />
               )}
             </Box>
@@ -404,20 +412,18 @@ const Editor = {
 };
 
 function checkMode(content) {
-  console.log(content);
-  if (!content) {
-    return "markdown";
-  }
-  try {
-    const data = JSON.parse(content);
-    console.log(data);
-    if (data.blocks) {
+  if (typeof content === "object") {
+    if (
+      Array.isArray(content.blocks) &&
+      typeof content.version === "string" &&
+      typeof content.time === "number"
+    ) {
       return "rich-text";
     }
-  } catch (err) {
+  } else {
     return "markdown";
   }
-  return "markdown";
 }
 
 export default Editor;
+export { RichText, Markdown };

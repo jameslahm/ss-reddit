@@ -38,3 +38,9 @@ body {
   font-weight: 500;
   letter-spacing: 0.3px;
 }
+
+@media (min-width: 651px) {
+  .codex-editor--narrow .ce-toolbar__plus {
+    left: -2rem;
+  }
+}

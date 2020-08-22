@@ -30,7 +30,7 @@ function Post() {
   const params = useParams();
   const toast = useToast();
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState("");
   const editorInstanceRef = useRef(null);
   const [errors, setErrors] = useState({ content: "" });
   const { data: post, isLoading, isError } = useQuery(
@@ -111,7 +111,7 @@ function Post() {
       <PostPreview
         post={post}
         onReply={() => {
-          setContent(null);
+          setContent("");
           setStatus("REPLY");
         }}
       ></PostPreview>
