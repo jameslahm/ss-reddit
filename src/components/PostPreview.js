@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Editor from "./Editor";
 import { useTheme, Avatar, IconButton, PseudoBox } from "@chakra-ui/core";
-import { Box, Flex, Text, Divider } from "@chakra-ui/core";
+import { Box, Flex, Text, Divider, Link } from "@chakra-ui/core";
 import formatDistance from "date-fns/formatDistance";
 import { FaBookmark, FaRegBookmark, FaReply } from "react-icons/fa";
 import { AuthContext } from "../utils";
-import { navigate } from "@reach/router";
+import { navigate, Link as ReachLink } from "@reach/router";
 
 function PostPreview({ post, onReply, onEdit, type = "post" }) {
   const theme = useTheme();
@@ -37,28 +37,27 @@ function PostPreview({ post, onReply, onEdit, type = "post" }) {
         </PseudoBox>
         <Box>
           {authState.userId === post.userId ? (
-            <IconButton
-              variant="ghost"
-              icon="edit"
-              size="lg"
-              onClick={
-                onEdit
-                  ? onEdit
-                  : () => {
-                      navigate(`/edit/${post.id}`);
-                    }
-              }
-            ></IconButton>
+            type === "comment" ? (
+              <IconButton
+                variant="ghost"
+                icon="edit"
+                size="lg"
+                onClick={onEdit}
+              ></IconButton>
+            ) : (
+              <Link as={ReachLink} to={`/edit/${post.id}`}>
+                <IconButton variant="ghost" icon="edit" size="lg"></IconButton>
+              </Link>
+            )
           ) : null}
           {type === "post" ? (
-            <IconButton
-              variant="ghost"
-              icon="arrow-forward"
-              size="lg"
-              onClick={() => {
-                navigate(`/post/${post.id}`);
-              }}
-            ></IconButton>
+            <Link as={ReachLink} to={`/post/${post.id}`}>
+              <IconButton
+                variant="ghost"
+                icon="arrow-forward"
+                size="lg"
+              ></IconButton>
+            </Link>
           ) : null}
 
           {type === "post" ? (
