@@ -142,7 +142,12 @@ function Post() {
         </form>
       ) : null}
       <Divider></Divider>
-      <Box overflow="auto">
+      <Box
+        overflow="auto"
+        border="1px"
+        borderRadius="md"
+        borderColor="gray.100"
+      >
         {(isOnlyAuthor
           ? post.reply.filter((reply) => reply.userId === post.userId)
           : post.reply
