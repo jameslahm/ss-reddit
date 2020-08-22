@@ -38,5 +38,5 @@
 - [x] update history and bookmark
 - [x] cache history and bookmark serialize
 - [x] paginate transition better UX (feature-paginated-query)
-- [ ] fix input mode switch
-- [ ] fix multiple reply input
+- [x] fix input mode switch
+- [x] fix multiple reply input
