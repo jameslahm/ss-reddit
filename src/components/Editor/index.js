@@ -309,7 +309,7 @@ const Editor = {
           setMode(realMode);
         }
         // Here we only update post content when the request resolved
-        // So only need to check once when isLoading trus to be false
+        // So only need to check once when isLoading turns to be false
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isLoading]);
       const [isPreview, setIsPreview] = useState(false);
