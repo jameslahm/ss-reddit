@@ -41,3 +41,5 @@
 - [x] fix input mode switch
 - [x] fix multiple reply input
 - [x] bug swicth mode error
+- [ ] don't show -> when in post
+- [ ] don't show border when no comments
