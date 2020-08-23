@@ -17,7 +17,6 @@ import {
   FormErrorMessage,
   useToast,
   Flex,
-  Divider,
   Switch,
   FormLabel,
   Text,
