@@ -142,7 +142,6 @@ function Post() {
           </Flex>
         </form>
       ) : null}
-      <Divider></Divider>
       <Box
         overflow="auto"
         border="1px"
