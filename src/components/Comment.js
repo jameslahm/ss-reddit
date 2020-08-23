@@ -82,7 +82,7 @@ function Comment({ comments, id, postId }) {
     <form onSubmit={handleSubmit}>
       <FormControl isInvalid={errors.content}>
         <Editor.Input
-          labelComponent={<Text>status</Text>}
+          labelComponent={<Text>{status}</Text>}
           content={content}
           setContent={setContent}
           ref={editorInstanceRef}
