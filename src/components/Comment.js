@@ -10,6 +10,7 @@ import {
   useToast,
   Flex,
   IconButton,
+  Text,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
 import { useMutation } from "react-query";
@@ -81,7 +82,7 @@ function Comment({ comments, id, postId }) {
     <form onSubmit={handleSubmit}>
       <FormControl isInvalid={errors.content}>
         <Editor.Input
-          labelComponent={status}
+          labelComponent={<Text>status</Text>}
           content={content}
           setContent={setContent}
           ref={editorInstanceRef}

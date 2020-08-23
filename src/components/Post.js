@@ -20,6 +20,7 @@ import {
   Divider,
   Switch,
   FormLabel,
+  Text,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
 import { useMutation, queryCache } from "react-query";
@@ -119,7 +120,7 @@ function Post() {
         <form onSubmit={handleSubmit}>
           <FormControl isInvalid={errors.content}>
             <Editor.Input
-              labelComponent={"Reply"}
+              labelComponent={<Text>REPLY</Text>}
               content={content}
               setContent={setContent}
               ref={editorInstanceRef}

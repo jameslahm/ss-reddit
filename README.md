@@ -40,3 +40,4 @@
 - [x] paginate transition better UX (feature-paginated-query)
 - [x] fix input mode switch
 - [x] fix multiple reply input
+- [ ] bug swicth mode error

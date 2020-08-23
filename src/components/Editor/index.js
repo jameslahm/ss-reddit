@@ -68,6 +68,11 @@ const WrapperBox = styled(Box)(({ theme }) => {
 });
 
 const RichTextInput = ({ theme, ...props }) => {
+  // Here we check data again
+  if (checkMode(props.data) !== "rich-text") {
+    return <></>;
+  }
+
   return (
     <WrapperBox theme={theme}>
       <EditorInput
@@ -317,7 +322,7 @@ const Editor = {
       return (
         <>
           <Flex mb={2} justifyContent="space-between" alignItems="baseline">
-            <Text>{labelComponent}</Text>
+            {labelComponent}
             <Flex alignItems="center">
               <FormLabel htmlFor="edit-mode">Enable Markdown Mode?</FormLabel>
               <Switch
