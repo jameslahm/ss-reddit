@@ -47,10 +47,8 @@ yarn lint
 ### 帖子详情页
 
 > 点击帖子右侧的进入箭头可查看帖子详情页，帖子回复显示采用`Reddit`楼中楼的设计
-
-![](./screenshots/post-detail.png)
-
 > 可以切换上方的`Only See Author`来实现是否只看楼主
+![](./screenshots/post-detail.png)
 
 #### 编辑帖子页面
 
