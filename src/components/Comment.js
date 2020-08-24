@@ -71,9 +71,9 @@ function Comment({ comments, id, postId }) {
         default:
           return;
       }
-      toast(generateToast(null, `/post/${postId}`));
+      toast(generateToast(null, `/post`));
     } catch (err) {
-      toast(generateToast(err, `/post/${postId}`));
+      toast(generateToast(err, `/post`));
     }
     setStatus("IDLE");
   }

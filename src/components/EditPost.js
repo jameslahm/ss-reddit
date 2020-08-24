@@ -46,7 +46,7 @@ function EditPost() {
       staleTime: Infinity,
       retry: false,
       onError: (error) => {
-        toast(generateToast(error, "/"));
+        toast(generateToast(error, `/edit`));
         if (error.status === 401) setAuthStateAndSave(null);
       },
       onSuccess: (data) => {

@@ -40,7 +40,7 @@ function Post() {
       enabled: params.id,
       retry: false,
       onError: (error) => {
-        toast(generateToast(error, "/"));
+        toast(generateToast(error, "/post"));
         if (error.status === 401) setAuthStateAndSave(null);
       },
       onSuccess: (data) => {
@@ -88,9 +88,9 @@ function Post() {
         token: authState.jwt,
         id: params.id,
       });
-      toast(generateToast(null, `/post/${params.id}`));
+      toast(generateToast(null, `/post`));
     } catch (err) {
-      toast(generateToast(err, `/post/${params.id}`));
+      toast(generateToast(err, `/post`));
     }
     setStatus("IDLE");
   }
