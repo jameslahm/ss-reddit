@@ -35,7 +35,7 @@
     "react-dom": "^16.13.1",
     "react-editor-js": "^1.6.2",
     "react-icons": "^3.11.0",
-    "react-query": "^2.9.0",
+    "react-query": "^2.10.0",
     "react-query-devtools": "^2.4.4",
     "react-scripts": "3.4.3",
     "react-textarea-autosize": "^8.2.0",
