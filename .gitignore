@@ -25,3 +25,4 @@ yarn-error.log*
 .vercel
 test.js
 test.md
+*.zip

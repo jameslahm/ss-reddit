@@ -1,5 +1,5 @@
 {
-  "time": 1597763698647,
+  "time": 1597913713598,
   "blocks": [
     { "type": "header", "data": { "text": "SS-Reddit", "level": 2 } },
     {
@@ -51,13 +51,13 @@
     { "type": "paragraph", "data": { "text": "😏 😀 😁 😂 🤣 😃 😄 😅 😆" } },
     {
       "type": "header",
-      "data": { "text": "You can add CheckBox", "level": 3 }
+      "data": { "text": "You can add CheckList", "level": 3 }
     },
     {
       "type": "checklist",
       "data": {
         "items": [
-          { "text": "Todo1", "checked": false },
+          { "text": "Todo1", "checked": true },
           { "text": "Todo2", "checked": false }
         ]
       }
@@ -79,6 +79,33 @@
         "code": "<span class=\"hljs-keyword\"><span class=\"hljs-keyword\">const</span></span> a=<span class=\"hljs-string\"><span class=\"hljs-string\">\"hello\"</span></span><div>\n<span class=\"hljs-built_in\"><span class=\"hljs-built_in\">console</span></span>.log(a)</div>",
         "language": "javascript",
         "theme": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/atom-one-dark.min.css"
+      }
+    },
+    {
+      "type": "header",
+      "data": { "text": "You can embed Anything", "level": 3 }
+    },
+    {
+      "type": "embed",
+      "data": {
+        "service": "codepen",
+        "source": "https://codepen.io/alvaromontoro/pen/jOqrYvm",
+        "embed": "https://codepen.io/alvaromontoro/embed/jOqrYvm?height=300&amp;theme-id=0&amp;default-tab=css,result&amp;embed-version=2",
+        "width": 600,
+        "height": 300,
+        "caption": ""
+      }
+    },
+    { "type": "header", "data": { "text": "You can add Link", "level": 2 } },
+    {
+      "type": "linkTool",
+      "data": {
+        "link": "https://ss-reddit.vercel.app/",
+        "meta": {
+          "title": "SS-Reddit",
+          "description": "school of software reddit",
+          "image": { "url": "https://ss-reddit.vercel.app/favicon.ico" }
+        }
       }
     },
     { "type": "header", "data": { "text": "You can add More...", "level": 3 } }

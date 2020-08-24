@@ -89,7 +89,7 @@ function Comment({ comments, id, postId }) {
         ></Editor.Input>
         <FormErrorMessage>{errors.content}</FormErrorMessage>
       </FormControl>
-      <Flex justifyContent="flex-end" mt={2}>
+      <Flex justifyContent="flex-end" mt={2} mb={2}>
         <Button
           variantColor="teal"
           onClick={() => {
