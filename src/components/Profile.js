@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import { useParams } from "@reach/router";
-import { AuthContext, PAGE_SIZE, generateToast } from "../utils";
+import { AuthContext, PAGE_SIZE, generateToast, getUser } from "../utils";
 import {
   Box,
   Stack,
@@ -81,7 +81,7 @@ function Profile() {
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
   const toast = useToast();
 
-  const { data, isLoading, isError } = useQuery(
+  const { data, isLoading: isPostsLoading, isError: isPostsError } = useQuery(
     ["post", PAGE_SIZE, page, params.id, authState.jwt],
     (key, size, page, id, token) => getPosts({ size, page, userId: id }, token),
     {
@@ -93,14 +93,20 @@ function Profile() {
     }
   );
 
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useQuery(["user", params.id, authState.jwt], (key, id, token) =>
+    getUser(id, token)
+  );
+
+  const isLoading = isPostsLoading || isUserLoading;
+  const isError = isPostsError || isUserError;
+
   if (isLoading || isError) {
     return <Skeleton mt={3} height="md"></Skeleton>;
   }
-
-  const user = {
-    nickname: data.posts[0] ? data.posts[0].nickname : "",
-    userId: parseInt(params.id),
-  };
 
   return (
     <Stack spacing={8}>
@@ -117,8 +123,8 @@ function Profile() {
       <Tabs variant="enclosed" variantColor="teal">
         <TabList>
           <Tab>Posts</Tab>
-          <Tab isDisabled={authState.userId !== user.userId}>History</Tab>
-          <Tab isDisabled={authState.userId !== user.userId}>BookMarks</Tab>
+          <Tab isDisabled={authState.userId !== user.id}>History</Tab>
+          <Tab isDisabled={authState.userId !== user.id}>BookMarks</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

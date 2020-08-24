@@ -45,6 +45,15 @@ export const getProfile = (token) => {
   }).then(handleRes);
 };
 
+export const getUser = (id, token) => {
+  return fetch(`${BASE_URL}/user/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  }).then(handleRes);
+};
+
 export const getPosts = (options, token) => {
   const queryParams = new URLSearchParams(options);
   return fetch(`${BASE_URL}/post?${queryParams.toString()}`, {
