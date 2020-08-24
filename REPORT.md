@@ -59,7 +59,7 @@ yarn lint
 
 > 回复帖子或者嵌套帖子可在富文本模式和`markdown`模式间切换
 
-> ![](./screenshots/reply-post.jpg)
+![](./screenshots/reply-post.jpg)
 
 #### 回复嵌套帖子
 
