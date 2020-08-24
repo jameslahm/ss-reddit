@@ -51,7 +51,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --fix src/**/*.{js,ts,tsx} && prettier --ignore-path .gitignore --write ."
+    "lint": "eslint --fix src/**/*.{js,ts,tsx} && prettier --ignore-path .gitignore --write .",
+    "archive": "git archive -o code.zip --format zip HEAD"
   },
   "lint-staged": {
     "*.{js,css,json}": "prettier --check",

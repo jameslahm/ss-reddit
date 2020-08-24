@@ -28,7 +28,7 @@ yarn lint
 
 > 可点击登录后 Header 中的`LogOut`进行登出
 
-#### 登录页面
+#### 登录页面 `/login`
 
 ![](./screenshots/login.png)
 
@@ -40,23 +40,25 @@ yarn lint
 
 ![](./screenshots/login-failure.jpg)
 
-### `Home`首页浏览帖子列表
+### `Home`首页浏览帖子列表 `/`
 
 ![](./screenshots/home.png)
 
-### 帖子详情页
+### 帖子详情页 `/post/:id`
 
 > 点击帖子右侧的进入箭头可查看帖子详情页，帖子回复显示采用`Reddit`楼中楼的设计
 > 可以切换上方的`Only See Author`来实现是否只看楼主
+
 ![](./screenshots/post-detail.png)
 
-#### 编辑帖子页面
+#### 编辑帖子页面 `/edit/:id`
 
 ![](./screenshots/edit-post.jpg)
 
 #### 回复帖子页面
 
 > 回复帖子或者嵌套帖子可在富文本模式和`markdown`模式间切换
+
 > ![](./screenshots/reply-post.jpg)
 
 #### 回复嵌套帖子
@@ -67,7 +69,7 @@ yarn lint
 
 ![](./screenshots/edit-reply.jpg)
 
-### `Post`路由进行发帖
+### `Post`路由进行发帖 `/edit`
 
 发帖可以采用富文本编辑模式或者`markdown`编辑模式
 
@@ -85,10 +87,11 @@ yarn lint
 
 ![](./screenshots/edit-markdown-preview.png)
 
-### `Profile`用户详情页面
+### `Profile`用户详情页面 `/user/:id`
 
 > 点击帖子左上方发帖人的头像或者名字可以进入发帖人详情页,用户详情页面`Posts Tab`显示用户发过的所有帖子，`History Tab`显示用户浏览过的帖子，`BookMarks Tab`显示用户收藏过的帖子，只有用户本人可以查看`History Tab`和`BookMarks Tab`
-> ![](./screenshots/profile.jpg)
+
+![](./screenshots/profile.jpg)
 
 ### 登录凭证过期页面
 
@@ -110,6 +113,7 @@ http://localhost:3000/post/3
 https://ss-reddit.vercel.app/post/3
 ### 回复帖子样例URL
 > 其中每层最后一个回帖都有嵌套回帖，共有10层
+
 http://localhost:3000/post/3
 https://ss-reddit.vercel.app/post/3
 
