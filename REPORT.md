@@ -9,6 +9,9 @@
 ## 开发说明
 
 ```bash
+# install dependencies
+yarn
+
 # develop
 # 为方便评测，在develop中将分页大小均设为了1，方便评测分页功能
 yarn start
