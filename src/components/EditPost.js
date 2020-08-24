@@ -50,6 +50,12 @@ function EditPost() {
         if (error.status === 401) setAuthStateAndSave(null);
       },
       onSuccess: (data) => {
+        if (data.userId !== authState.userId) {
+          toast(generateToast({ status: 400 }, `/edit`));
+          navigate(`/post/${params.id}`);
+          return;
+        }
+
         ReactDOM.unstable_batchedUpdates(() => {
           try {
             const res = JSON.parse(data.content);
@@ -119,14 +125,14 @@ function EditPost() {
         token: authState.jwt,
         id: params.id,
       });
-      toast(generateToast(null, `/post`));
+      toast(generateToast(null, `/edit`));
       queryCache.invalidateQueries(["post", params.id, authState.jwt]);
       if (params.id) navigate(`/post/${params.id}`);
       else {
         navigate(`/post/${data.postId}`);
       }
     } catch (err) {
-      toast(generateToast(err, `/post`));
+      toast(generateToast(err, `/edit`));
     }
   }
 

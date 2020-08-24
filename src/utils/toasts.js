@@ -37,6 +37,12 @@ export const generateToast = (err, path) => {
         if (path === "/login") {
           return LOGIN_FAILURE;
         }
+        if (path === "/edit") {
+          return {
+            ...FAILURE_TOAST,
+            description: "Sorry, you have no permission",
+          };
+        }
         break;
       }
       default: {
