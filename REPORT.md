@@ -97,6 +97,12 @@ yarn lint
 
 ![](./screenshots/expired-login.jpg)
 
+### 编辑无权限页面
+> 编辑他人帖子会自动跳回该帖子详情页
+
+![](./screenshots/permission-error.jpg)
+
+
 ### 网络错误或其他错误页面
 
 ![](./screenshots/network-error.jpg)
