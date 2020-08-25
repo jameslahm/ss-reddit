@@ -101,28 +101,35 @@ yarn lint
 ![](./screenshots/expired-login.jpg)
 
 ### 编辑无权限页面
+
 > 编辑他人帖子会自动跳回该帖子详情页
 
 ![](./screenshots/permission-error.jpg)
-
 
 ### 网络错误或其他错误页面
 
 ![](./screenshots/network-error.jpg)
 
 ## 功能亮点
-实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，支持`Todo checkList`，支持添加`table`,`code`以及`link`等，`markdown`编辑模式支持`GitHub Flavored Markdown Spec`
+
+- 实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等(可通过直接粘贴链接实现嵌入)，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，支持`Todo checkList`，支持添加`table`，`code`以及`link`等，输入时可使用 tab 键添加相应输入块；`markdown`编辑模式支持`GitHub Flavored Markdown Spec`
+- UI 支持`dark`和`light`两种主题
 
 ## 样例
-### `Markdown`模式帖子样例URL
+
+### `Markdown`模式帖子样例 URL
+
 http://localhost:3000/post/10
 https://ss-reddit.vercel.app/post/10
-### 富文本模式帖子样例URL
-http://localhost:3000/post/3
-https://ss-reddit.vercel.app/post/3
-### 回复帖子样例URL
-> 其中每层最后一个回帖都有嵌套回帖，共有10层
+
+### 富文本模式帖子样例 URL
 
 http://localhost:3000/post/3
 https://ss-reddit.vercel.app/post/3
 
+### 回复帖子样例 URL
+
+> 其中每层最后一个回帖都有嵌套回帖，共有 10 层
+
+http://localhost:3000/post/3
+https://ss-reddit.vercel.app/post/3
