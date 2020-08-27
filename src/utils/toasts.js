@@ -24,12 +24,20 @@ export const LOGIN_SUCCESS = {
 
 export const UNAUTHORIZED_FAILURE = {
   ...FAILURE_TOAST,
-  description: "Sorry,You credential has been expired,you need to re-login",
+  description: "Sorry,Your credential has been expired,you need to re-login",
+};
+
+const NOT_FOUND_FAILURE = {
+  ...FAILURE_TOAST,
+  description: "Sorry,No such page ...",
 };
 
 export const generateToast = (err, path) => {
   if (err) {
     switch (err.status) {
+      case 404: {
+        return NOT_FOUND_FAILURE;
+      }
       case 401: {
         return UNAUTHORIZED_FAILURE;
       }
@@ -42,6 +50,9 @@ export const generateToast = (err, path) => {
             ...FAILURE_TOAST,
             description: "Sorry, you have no permission",
           };
+        }
+        if (path === "/post") {
+          return NOT_FOUND_FAILURE;
         }
         break;
       }
