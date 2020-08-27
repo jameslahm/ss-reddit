@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { useParams } from "@reach/router";
+import { useParams, navigate } from "@reach/router";
 import { AuthContext, PAGE_SIZE, generateToast, getUser } from "../utils";
 import {
   Box,
@@ -97,8 +97,18 @@ function Profile() {
     data: user,
     isLoading: isUserLoading,
     isError: isUserError,
-  } = useQuery(["user", params.id, authState.jwt], (key, id, token) =>
-    getUser(id, token)
+  } = useQuery(
+    ["user", params.id, authState.jwt],
+    (key, id, token) => getUser(id, token),
+    {
+      retry: false,
+      onError: (error) => {
+        if (error.status === 404) {
+          toast(generateToast(error, "/user"));
+          navigate(`/`);
+        }
+      },
+    }
   );
 
   const isLoading = isPostsLoading || isUserLoading;

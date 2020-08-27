@@ -48,6 +48,9 @@ function EditPost() {
       onError: (error) => {
         toast(generateToast(error, `/edit`));
         if (error.status === 401) setAuthStateAndSave(null);
+        if (error.status === 400) {
+          navigate(`/`);
+        }
       },
       onSuccess: (data) => {
         if (data.userId !== authState.userId) {

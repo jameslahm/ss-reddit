@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import PostPreview from "./PostPreview";
-import { useParams } from "@reach/router";
+import { useParams, navigate } from "@reach/router";
 import {
   AuthContext,
   getPost,
@@ -42,6 +42,9 @@ function Post() {
       onError: (error) => {
         toast(generateToast(error, "/post"));
         if (error.status === 401) setAuthStateAndSave(null);
+        if (error.status === 400) {
+          navigate(`/`);
+        }
       },
       onSuccess: (data) => {
         const cachedPosts =
