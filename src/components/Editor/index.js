@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import CustomEmoji from "../CustomEmoji";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
 import {
@@ -26,6 +27,7 @@ import {
   Image,
   Link,
   Divider,
+  Button,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 import ResizeTextarea from "react-textarea-autosize";
@@ -67,21 +69,53 @@ const WrapperBox = styled(Box)(({ theme }) => {
   `;
 });
 
-const RichTextInput = ({ theme, ...props }) => {
+const RichTextInput = ({ theme, instanceRef, ...props }) => {
   // Here we check data again
+  const [isShowEmoji, setIsShowEmoji] = useState(false);
+  const editorInstanceRef = useRef(null);
   if (checkMode(props.data) !== "rich-text") {
     return <></>;
   }
 
   return (
     <WrapperBox theme={theme}>
-      <EditorInput
-        // FIXME: multiple times bug
-        // enableReInitialize={true}
-        minHeight={100}
-        logLevel={process.env.NODE_ENV === "development" ? "VERBOSE" : "ERROR"}
-        {...props}
-      ></EditorInput>
+      <Box position="relative">
+        <EditorInput
+          // FIXME: multiple times bug
+          // enableReInitialize={true}
+          minHeight={100}
+          logLevel={
+            process.env.NODE_ENV === "development" ? "VERBOSE" : "ERROR"
+          }
+          instanceRef={(instance) => {
+            instanceRef.current = instance;
+            editorInstanceRef.current = instance;
+          }}
+          {...props}
+        ></EditorInput>
+        <Box zIndex={9} position="absolute" right={"-1.5rem"} top={"0"}>
+          {isShowEmoji ? (
+            <CustomEmoji
+              onChange={(emoji) => {
+                editorInstanceRef.current.blocks.insert("emoji", {
+                  imageUrl: emoji.imageUrl,
+                });
+                setIsShowEmoji(false);
+              }}
+              onClose={(e) => setIsShowEmoji(false)}
+            ></CustomEmoji>
+          ) : (
+            <Button
+              variant="ghost"
+              onClick={(e) => setIsShowEmoji(!isShowEmoji)}
+            >
+              <span role="img" aria-label="emoji">
+                😀
+              </span>
+            </Button>
+          )}
+        </Box>
+      </Box>
     </WrapperBox>
   );
 };
@@ -239,6 +273,13 @@ const RichTextOutput = ({ style = {}, config = {}, data = {} }) => {
               </Box>
             );
           }
+          case "emoji": {
+            return (
+              <Box key={index} mb={1}>
+                <Image src={data.imageUrl}></Image>
+              </Box>
+            );
+          }
           default:
             return <></>;
         }
@@ -266,6 +307,8 @@ const MarkdownStyleWrapper = styled.div`
 `;
 
 const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
+  const [isShowEmoji, setIsShowEmoji] = useState(false);
+
   return isPreview ? (
     <WrapperBox theme={theme}>
       <MarkdownStyleWrapper>
@@ -281,11 +324,34 @@ const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
       </MarkdownStyleWrapper>
     </WrapperBox>
   ) : (
-    <AutoResizeTextarea
-      minHeight="9rem"
-      value={content || ""}
-      onChange={onChange}
-    ></AutoResizeTextarea>
+    <Box position="relative">
+      <AutoResizeTextarea
+        minHeight="9rem"
+        value={content || ""}
+        onChange={onChange}
+      ></AutoResizeTextarea>
+      <Box zIndex={9} position="absolute" right={"2"} top={"2"}>
+        {isShowEmoji ? (
+          <CustomEmoji
+            onChange={(emoji) => {
+              onChange({
+                target: {
+                  value: (content || "") + `![](${emoji.imageUrl})`,
+                },
+              });
+              setIsShowEmoji(false);
+            }}
+            onClose={(e) => setIsShowEmoji(false)}
+          ></CustomEmoji>
+        ) : (
+          <Button variant="ghost" onClick={(e) => setIsShowEmoji(!isShowEmoji)}>
+            <span role="img" aria-label="emoji">
+              😀
+            </span>
+          </Button>
+        )}
+      </Box>
+    </Box>
   );
 };
 
@@ -357,7 +423,7 @@ const Editor = {
 
           {mode === "rich-text" ? (
             <Box
-              pt={1}
+              pt={2}
               // TODO: check height
               // Better UX
               minHeight={144}
@@ -371,7 +437,7 @@ const Editor = {
               {isLoading ? null : (
                 <RichText.Input
                   theme={theme}
-                  instanceRef={(instance) => (ref.current = instance)}
+                  instanceRef={ref}
                   tools={EDITOR_JS_TOOLS}
                   data={content}
                 />

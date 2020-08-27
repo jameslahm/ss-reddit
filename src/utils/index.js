@@ -1,9 +1,11 @@
 import theme from "./theme";
 import AuthContext from "./auth";
 import mdRender from "./mdrender";
+import CustomeEmoji from "./emoji";
 
 export { theme };
 export { AuthContext };
+export { CustomeEmoji };
 export * from "./api";
 export * from "./toasts";
 export { mdRender };
