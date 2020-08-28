@@ -12,7 +12,7 @@ import CheckList from "@editorjs/checklist";
 import Delimiter from "@editorjs/delimiter";
 import InlineCode from "@editorjs/inline-code";
 import { uploadImage } from "../../utils";
-import { CustomeEmoji } from "../../utils";
+import CustomEmojiBlock from "./emoji";
 
 const EDITOR_JS_TOOLS = {
   embed: {
@@ -56,7 +56,7 @@ const EDITOR_JS_TOOLS = {
   inlineCode: InlineCode,
   // simpleImage: SimpleImage,
   emoji: {
-    class: CustomeEmoji,
+    class: CustomEmojiBlock,
   },
 };
 
