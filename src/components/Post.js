@@ -20,6 +20,7 @@ import {
   Switch,
   FormLabel,
   Text,
+  useColorMode,
 } from "@chakra-ui/core";
 import Editor from "./Editor";
 import { useMutation, queryCache } from "react-query";
@@ -29,6 +30,11 @@ import Paginate from "./Paginate";
 function Post() {
   const params = useParams();
   const toast = useToast();
+  const { colorMode } = useColorMode();
+  const borderColor = {
+    light: "gray.100",
+    dark: "gray.500",
+  };
   const { authState, setAuthStateAndSave } = useContext(AuthContext);
   const [content, setContent] = useState("");
   const editorInstanceRef = useRef(null);
@@ -148,7 +154,7 @@ function Post() {
         overflow="auto"
         border="1px"
         borderRadius="md"
-        borderColor="gray.100"
+        borderColor={borderColor[colorMode]}
       >
         {(isOnlyAuthor
           ? post.reply.filter((reply) => reply.userId === post.userId)

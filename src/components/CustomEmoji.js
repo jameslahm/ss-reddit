@@ -9,6 +9,7 @@ import {
   CloseButton,
   Grid,
   Image,
+  useColorMode,
 } from "@chakra-ui/core";
 import { FaRegSmile, FaGithub } from "react-icons/fa";
 
@@ -38,17 +39,29 @@ const customData = [
 ];
 
 function CustomEmoji({ onChange, onClose }) {
+  const { colorMode } = useColorMode();
+  const BgColor = {
+    light: "rgb(255,255,255,0.8)",
+    dark: "rgba(26, 32, 44,0.8)",
+  };
+
+  const borderColor = {
+    light: "gray.100",
+    dark: "gray.500",
+  };
+
   return (
     <Box
       maxWidth={"2xs"}
       border="1px"
       borderRadius="md"
-      borderColor="gray.100"
+      borderColor={borderColor[colorMode]}
       pb={2}
       position="relative"
       style={{
         backdropFilter: "saturate(180%) blur(20px)",
       }}
+      bg={BgColor[colorMode]}
     >
       <CloseButton
         position="absolute"

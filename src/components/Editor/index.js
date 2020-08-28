@@ -42,6 +42,7 @@ export const AutoResizeTextarea = React.forwardRef((props, ref) => {
       ref={ref}
       as={ResizeTextarea}
       {...props}
+      maxRows={10}
     />
   );
 });
@@ -327,10 +328,12 @@ const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
     <Box>
       <AutoResizeTextarea
         minHeight="9rem"
+        maxHeight={"5xl"}
+        overflow="auto"
         value={content || ""}
         onChange={onChange}
       ></AutoResizeTextarea>
-      <Box zIndex={9} position="absolute" right={2} top={2}>
+      <Box zIndex={9} position="absolute" right={4} top={2}>
         {isShowEmoji ? (
           <CustomEmoji
             onChange={(emoji) => {
