@@ -79,7 +79,7 @@ const RichTextInput = ({ theme, instanceRef, ...props }) => {
 
   return (
     <WrapperBox theme={theme}>
-      <Box position="relative">
+      <Box>
         <EditorInput
           // FIXME: multiple times bug
           // enableReInitialize={true}
@@ -93,7 +93,7 @@ const RichTextInput = ({ theme, instanceRef, ...props }) => {
           }}
           {...props}
         ></EditorInput>
-        <Box zIndex={9} position="absolute" right={"-1.5rem"} top={"0"}>
+        <Box zIndex={9} position="absolute" right={4} top={2}>
           {isShowEmoji ? (
             <CustomEmoji
               onChange={(emoji) => {
@@ -324,13 +324,13 @@ const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
       </MarkdownStyleWrapper>
     </WrapperBox>
   ) : (
-    <Box position="relative">
+    <Box>
       <AutoResizeTextarea
         minHeight="9rem"
         value={content || ""}
         onChange={onChange}
       ></AutoResizeTextarea>
-      <Box zIndex={9} position="absolute" right={"2"} top={"2"}>
+      <Box zIndex={9} position="absolute" right={2} top={2}>
         {isShowEmoji ? (
           <CustomEmoji
             onChange={(emoji) => {
@@ -420,39 +420,40 @@ const Editor = {
               ) : null}
             </Flex>
           </Flex>
-
-          {mode === "rich-text" ? (
-            <Box
-              pt={2}
-              // TODO: check height
-              // Better UX
-              minHeight={144}
-              border="1px"
-              borderRadius="md"
-              borderColor="blue.500"
-              maxHeight={"5xl"}
-              overflow="auto"
-              px={8}
-            >
-              {isLoading ? null : (
-                <RichText.Input
-                  theme={theme}
-                  instanceRef={ref}
-                  tools={EDITOR_JS_TOOLS}
-                  data={content}
-                />
-              )}
-            </Box>
-          ) : (
-            <Markdown.Input
-              content={content}
-              isPreview={isPreview}
-              theme={theme}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            ></Markdown.Input>
-          )}
+          <Box position="relative">
+            {mode === "rich-text" ? (
+              <Box
+                pt={2}
+                // TODO: check height
+                // Better UX
+                minHeight={144}
+                border="1px"
+                borderRadius="md"
+                borderColor="blue.500"
+                maxHeight={"5xl"}
+                overflow="auto"
+                px={8}
+              >
+                {isLoading ? null : (
+                  <RichText.Input
+                    theme={theme}
+                    instanceRef={ref}
+                    tools={EDITOR_JS_TOOLS}
+                    data={content}
+                  />
+                )}
+              </Box>
+            ) : (
+              <Markdown.Input
+                content={content}
+                isPreview={isPreview}
+                theme={theme}
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+              ></Markdown.Input>
+            )}
+          </Box>
         </>
       );
     }
