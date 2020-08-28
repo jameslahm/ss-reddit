@@ -25,7 +25,7 @@ yarn lint
 
 ## 功能实现
 
-> 说明：点击帖子右上方的编辑按钮可以编辑自己发过的帖子或者回帖，点击右侧的收藏按钮可以收藏该帖子，点击右侧的回复按钮可对该帖子或者回帖进行回复，所有展示帖子列表页面均有分页
+> 说明：点击帖子右上方的编辑按钮可以编辑自己发过的帖子或者回帖，点击右上方的收藏按钮可以收藏该帖子，点击右上方的回复按钮可对该帖子或者回帖进行回复，所有展示帖子列表页面均有分页，编辑及回复帖子均支持富文本模式和`markdown`模式
 
 ### `Login`路由进行登录
 
@@ -49,7 +49,7 @@ yarn lint
 
 ### 帖子详情页 `/post/:id`
 
-> 点击帖子右侧的进入箭头可查看帖子详情页，帖子回复显示采用`Reddit`楼中楼的设计
+> 点击帖子右上方的进入箭头可查看帖子详情页，帖子回复显示采用`Reddit`楼中楼的设计
 > 可以切换上方的`Only See Author`来实现是否只看楼主
 
 ![](./screenshots/post-detail.png)
@@ -59,8 +59,6 @@ yarn lint
 ![](./screenshots/edit-post.jpg)
 
 #### 回复帖子页面
-
-> 回复帖子或者嵌套帖子可在富文本模式和`markdown`模式间切换
 
 ![](./screenshots/reply-post.jpg)
 
@@ -73,8 +71,6 @@ yarn lint
 ![](./screenshots/edit-reply.jpg)
 
 ### `Post`路由进行发帖 `/edit`
-
-发帖可以采用富文本编辑模式或者`markdown`编辑模式
 
 #### 富文本编辑模式
 
@@ -106,13 +102,16 @@ yarn lint
 
 ![](./screenshots/permission-error.jpg)
 
+### 404错误界面
+![](./screenshots/404.jpg)
+
 ### 网络错误或其他错误页面
 
 ![](./screenshots/network-error.jpg)
 
 ## 功能亮点
 
-- 实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等(可通过直接粘贴链接实现嵌入)，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，支持`Todo checkList`，支持添加`table`，`code`以及`link`等，输入时可使用 tab 键添加相应输入块；`markdown`编辑模式支持`GitHub Flavored Markdown Spec`
+- 实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等(可通过直接粘贴链接实现嵌入)，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，支持`Todo checkList`，支持添加`table`，`code`以及`link`等，输入时可使用 tab 键添加相应输入块；`markdown`编辑模式支持`GitHub Flavored Markdown Spec`；两种编辑模式均支持自定义表情的插入，点击编辑界面右上角表情按钮选择自定义表情即可，目前添加了`Github`的`octocat`表情和百度贴吧的滑稽表情
 - UI 支持`dark`和`light`两种主题
 
 ## 样例
@@ -133,3 +132,7 @@ https://ss-reddit.vercel.app/post/3
 
 http://localhost:3000/post/3
 https://ss-reddit.vercel.app/post/3
+
+
+## 其他说明
+`development`模式中浏览器开发者工具控制台界面会报`controlled components`以及`Invalid DOM property 'for'`的警告，原因是使用第三方包中的组件错误，已提`pull request`
