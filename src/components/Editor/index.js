@@ -423,7 +423,7 @@ const Editor = {
           <Box position="relative">
             {mode === "rich-text" ? (
               <Box
-                pt={2}
+                pt={1}
                 // TODO: check height
                 // Better UX
                 minHeight={144}
