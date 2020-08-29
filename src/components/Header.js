@@ -34,6 +34,7 @@ const Button = React.forwardRef((props, ref) => {
       ref={ref}
       fontSize="md"
       fontWeight="normal"
+      px={[2, 4]}
       {...props}
     ></ChakraButton>
   );
@@ -67,6 +68,7 @@ function Header() {
       pb={4}
       position="sticky"
       bg={headerBgColor[colorMode]}
+      alignItems="center"
     >
       <IconButton
         icon={colorMode === "light" ? "moon" : "sun"}

@@ -62,3 +62,7 @@ body {
   scrollbar-width: 10px;
   scrollbar-color: darkgrey;
 }
+
+iframe {
+  max-width: 100% !important;
+}
