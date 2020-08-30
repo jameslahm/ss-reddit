@@ -66,3 +66,7 @@ body {
 iframe {
   max-width: 100% !important;
 }
+
+* {
+  overflow-wrap: break-word;
+}
