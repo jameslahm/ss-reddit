@@ -129,9 +129,12 @@ export const uploadImage = (file) => {
     body,
   }).then((res) => {
     if (res.ok) {
-      return res
-        .json()
-        .then((v) => ({ success: 1, file: { url: v.data.display_url } }));
+      return res.json().then((v) => ({
+        success: 1,
+        file: {
+          url: `https://ss-reddit.vercel.app/api/img?url=${v.data.url}`,
+        },
+      }));
     } else {
       return { success: 0 };
     }
