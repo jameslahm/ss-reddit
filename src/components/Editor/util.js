@@ -85,6 +85,11 @@ const RENDER_STYLE = {
   paragraph: {
     marginLeft: "0.5rem",
   },
+  image: {
+    img: {},
+    figcaption: {},
+    figure: {},
+  },
 };
 
 const RENDER_CONFIG = {

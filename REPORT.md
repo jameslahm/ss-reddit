@@ -111,7 +111,7 @@ yarn lint
 
 ## 功能亮点
 
-- 实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等(可通过直接粘贴链接实现嵌入)，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，支持`Todo checkList`，支持添加`table`，`code`以及`link`等，输入时可使用 tab 键添加相应输入块；`markdown`编辑模式支持`GitHub Flavored Markdown Spec`，另外也支持`latex`公式渲染；两种编辑模式均支持自定义表情的插入，点击编辑界面右上角表情按钮选择自定义表情即可，目前添加了`Github`的`octocat`表情和百度贴吧的滑稽表情
+- 实现了富文本编辑以及`markdown`编辑模式，同时富文本编辑模式支持嵌入，比如`codepen.io`，`youtube`等(可通过直接粘贴链接实现嵌入)，支持通过上传本地文件、粘贴图片链接，拖拽文件等方式输入图片，且富文本编辑模式的帖子在渲染时，长图及宽图会自动缩小，点击该图片即可放大查看，再次点击可缩小，支持`Todo checkList`，支持添加`table`，`code`以及`link`等，输入时可使用 tab 键添加相应输入块，点击块后右上方出现的四点按钮可以进行块的变换、设置、删除等；`markdown`编辑模式支持`GitHub Flavored Markdown Spec`，另外也支持`latex`公式渲染；两种编辑模式均支持自定义表情的插入，点击编辑界面右上角表情按钮选择自定义表情即可，目前添加了`Github`的`octocat`表情和百度贴吧的滑稽表情
 - UI 支持`dark`和`light`两种主题
 
 ## 样例

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import CustomEmoji from "../CustomEmoji";
+import ReactHtmlParser from "react-html-parser";
 import EditorInput from "react-editor-js";
 import { EDITOR_JS_TOOLS, RENDER_CONFIG, RENDER_STYLE } from "./util";
 import {
   ListOutput,
-  ImageOutput,
   HeaderOutput,
   EmbedOutput,
   QuoteOutput,
@@ -118,6 +118,38 @@ const RichTextInput = ({ theme, instanceRef, ...props }) => {
         </Box>
       </Box>
     </WrapperBox>
+  );
+};
+
+const ImageOutput = ({ data, style, config }) => {
+  const [status, setStatus] = useState("PREVIEW");
+  // The package changes the props directly,here is a hack
+  return (
+    <Box
+      cursor={status === "PREVIEW" ? "zoom-in" : "zoom-out"}
+      maxWidth={status === "PREVIEW" ? "3xs" : "100%"}
+      onClick={() => {
+        if (status === "PREVIEW") setStatus("ORIGINAL");
+        else {
+          setStatus("PREVIEW");
+        }
+      }}
+    >
+      <figure>
+        <Image
+          src={data.file.url}
+          alt={data.caption || ""}
+          maxHeight={status === "PREVIEW" ? "3xs" : "100%"}
+          mx="auto"
+          mb={1}
+        />
+        {data.caption && (
+          <figcaption style={{ textAlign: "center" }}>
+            {ReactHtmlParser(data.caption)}
+          </figcaption>
+        )}
+      </figure>
+    </Box>
   );
 };
 
