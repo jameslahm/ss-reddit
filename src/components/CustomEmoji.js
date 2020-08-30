@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/core";
 import { FaRegSmile, FaGithub } from "react-icons/fa";
 
+// example emoji data
 const customData = [
   {
     id: "github",
@@ -34,6 +35,31 @@ const customData = [
         imageUrl:
           "https://tb2.bdstatic.com/tb/editor/images/face/i_f25.png?t=20140803",
       },
+      {
+        name: "smile",
+        imageUrl:
+          "https://tb2.bdstatic.com/tb/editor/images/face/i_f01.png?t=20140803",
+      },
+      {
+        name: "good",
+        imageUrl:
+          "https://tb2.bdstatic.com/tb/editor/images/face/i_f13.png?t=20140803",
+      },
+      {
+        name: "wink",
+        imageUrl:
+          "https://tb2.bdstatic.com/tb/editor/images/face/i_f26.png?t=20140803",
+      },
+      {
+        name: "sunglasses",
+        imageUrl:
+          "https://tb2.bdstatic.com/tb/editor/images/face/i_f05.png?t=20140803",
+      },
+      {
+        name: "Wronged",
+        imageUrl:
+          "https://tb2.bdstatic.com/tb/editor/images/face/i_f19.png?t=20140803",
+      },
     ],
   },
 ];
@@ -46,7 +72,7 @@ function CustomEmoji({ onChange, onClose }) {
   };
 
   const borderColor = {
-    light: "gray.100",
+    light: "gray.300",
     dark: "gray.500",
   };
 

@@ -32,7 +32,7 @@ function Post() {
   const toast = useToast();
   const { colorMode } = useColorMode();
   const borderColor = {
-    light: "gray.100",
+    light: "gray.300",
     dark: "gray.500",
   };
   const { authState, setAuthStateAndSave } = useContext(AuthContext);

@@ -14,7 +14,6 @@ import {
   ParagraphOutput,
   ChecklistOutput,
 } from "editorjs-react-renderer";
-import { css } from "@emotion/core";
 import { mdRender } from "../../utils";
 import {
   Text,
@@ -28,6 +27,7 @@ import {
   Link,
   Divider,
   Button,
+  useColorMode,
 } from "@chakra-ui/core";
 import styled from "@emotion/styled";
 import ResizeTextarea from "react-textarea-autosize";
@@ -47,9 +47,16 @@ export const AutoResizeTextarea = React.forwardRef((props, ref) => {
   );
 });
 
-const WrapperBox = styled(Box)(({ theme }) => {
-  return css`
-    h1 {
+const WrapperBox = styled(Box)(({ theme, colorMode = "light" }) => {
+  const tableBorder = {
+    light: "1px solid #CBD5E0",
+    dark: "1px solid #718096",
+  };
+  const selectedBgColor = {
+    light: "#e1f2ff",
+    dark: "#2a3238",
+  };
+  return `h1 {
       font-size: ${theme.fontSizes["5xl"]};
     }
     h2 {
@@ -67,19 +74,38 @@ const WrapperBox = styled(Box)(({ theme }) => {
     h6 {
       font-size: ${theme.fontSizes.lg};
     }
+    table {
+      text-align: center;
+      border-collapse: collapse;
+      & th {
+        border: ${tableBorder[colorMode]};
+        padding: 0.5rem;
+      }
+      & td {
+        border: ${tableBorder[colorMode]};
+        padding: 0.5rem;
+      }
+    }
+    .image-tool--withBackground .image-tool__image {
+      background:inherit !important;
+    }
+    .ce-block--selected .ce-block__content {
+      background-color: ${selectedBgColor[colorMode]};
+    }
   `;
 });
 
 const RichTextInput = ({ theme, instanceRef, ...props }) => {
   // Here we check data again
   const [isShowEmoji, setIsShowEmoji] = useState(false);
+  const { colorMode } = useColorMode();
   const editorInstanceRef = useRef(null);
   if (checkMode(props.data) !== "rich-text") {
     return <></>;
   }
 
   return (
-    <WrapperBox theme={theme}>
+    <WrapperBox theme={theme} colorMode={colorMode}>
       <Box>
         <EditorInput
           // FIXME: multiple times bug
@@ -121,9 +147,8 @@ const RichTextInput = ({ theme, instanceRef, ...props }) => {
   );
 };
 
-const ImageOutput = ({ data, style, config }) => {
+const ImageOutput = ({ data }) => {
   const [status, setStatus] = useState("PREVIEW");
-  // The package changes the props directly,here is a hack
   return (
     <Box
       cursor={status === "PREVIEW" ? "zoom-in" : "zoom-out"}
@@ -140,13 +165,19 @@ const ImageOutput = ({ data, style, config }) => {
           src={data.file.url}
           alt={data.caption || ""}
           maxHeight={status === "PREVIEW" ? "3xs" : "100%"}
-          mx="auto"
+          // mx="auto"
           mb={1}
+          mx={
+            status === "PREVIEW"
+              ? "unset"
+              : data.withBackground
+              ? "auto"
+              : "unset"
+          }
+          width={data.stretched ? "100%" : "unset"}
         />
         {data.caption && (
-          <figcaption style={{ textAlign: "center" }}>
-            {ReactHtmlParser(data.caption)}
-          </figcaption>
+          <figcaption>{ReactHtmlParser(data.caption)}</figcaption>
         )}
       </figure>
     </Box>
@@ -223,7 +254,7 @@ const RichTextOutput = ({ style = {}, config = {}, data = {} }) => {
           }
           case "table": {
             return (
-              <Box key={index} mb={1}>
+              <Box key={index} mb={1} pl={2}>
                 <TableOutput
                   data={data}
                   style={style.table || {}}
@@ -341,9 +372,10 @@ const MarkdownStyleWrapper = styled.div`
 
 const MarkdownInput = ({ content, theme, isPreview, onChange }) => {
   const [isShowEmoji, setIsShowEmoji] = useState(false);
+  const { colorMode } = useColorMode();
 
   return isPreview ? (
-    <WrapperBox theme={theme}>
+    <WrapperBox theme={theme} colorMode={colorMode}>
       <MarkdownStyleWrapper>
         <Box
           minHeight="9rem"
@@ -494,11 +526,12 @@ const Editor = {
     }
   ),
   Output: ({ content, theme }) => {
+    const { colorMode } = useColorMode();
     try {
       const data = JSON.parse(content);
       if (data.time && data.blocks && data.version) {
         return (
-          <WrapperBox theme={theme}>
+          <WrapperBox theme={theme} colorMode={colorMode}>
             <RichText.Output
               style={RENDER_STYLE}
               config={RENDER_CONFIG}
@@ -509,7 +542,7 @@ const Editor = {
       }
     } catch (err) {
       return (
-        <WrapperBox theme={theme}>
+        <WrapperBox theme={theme} colorMode={colorMode}>
           <Markdown.Output content={content}></Markdown.Output>
         </WrapperBox>
       );
