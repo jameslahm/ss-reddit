@@ -35,7 +35,11 @@ function LogIn() {
       const data = await mutate({ username, password }, { throwOnError: true });
       setAuthStateAndSave({ ...data, bookmarks: [] });
       toast(generateToast(null, "/login"));
-      navigate(location.state.from || "/");
+      if (location.state && location.state.from) {
+        navigate(location.state.from);
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       toast(generateToast(err, "/login"));
     }
