@@ -10164,10 +10164,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-query-devtools@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/react-query-devtools/-/react-query-devtools-2.4.4.tgz#b179e5f5a0fd17027a66c59f782d051577eb79fb"
-  integrity sha512-ojVrdGZHuY4CXZzj4Q4VgT20fJB70quGwCONpNkLPG2s7C8u/7e6ZJQjoSySZ3WFydgvJqKxcHmIZuPGHqP6Vw==
+react-query-devtools@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/react-query-devtools/-/react-query-devtools-2.4.5.tgz#9f33cb1e85327e0b468081b553da86888822af9b"
+  integrity sha512-N6Y/JHy0FZWdcn1l+GGdcjos1LctyBTebJbMb11NJd/R9cL13ATqsICyRXlF07KdzcO0I9w4q3GHW0/h6zsx6Q==
   dependencies:
     match-sorter "^4.1.0"
 
