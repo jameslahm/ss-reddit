@@ -4700,10 +4700,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-editorjs-react-renderer@^2.3.6:
-  version "2.3.6"
-  resolved "https://registry.yarnpkg.com/editorjs-react-renderer/-/editorjs-react-renderer-2.3.6.tgz#4fe49bfa198edbf6b3d42760e02b372f02782f6c"
-  integrity sha512-dgog3dVD7vVtndOO7Q734/u7hmOWcZbM0A+PAhHZUs+xIRbKctpq226YJfuLnnaHd7xokeRcWGk3ihbqQArXBw==
+editorjs-react-renderer@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/editorjs-react-renderer/-/editorjs-react-renderer-2.4.0.tgz#eeb0712af0d3861bacf104377ec396f2070d0b58"
+  integrity sha512-Pe6DeAYYZkRa3GrWLPV5G/CB9L9L37erwKngS6HWbq7nvOUsV6cVvYivMh+WKVodOLr//s1289fLTxwMaQN5Tg==
   dependencies:
     react-html-parser "2.0.2"
 
