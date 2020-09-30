@@ -1265,10 +1265,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@editorjs/checklist@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/checklist/-/checklist-1.1.0.tgz#1c5a083a48852f3d86d6086d2e1a6057ac5b0429"
-  integrity sha512-rE0weE4iHoN6NM9GpP0XMiighGGrSyAkWWtmkRmn/2vLot3mXrh15KGaRJIP17HOW62yrOy4zJdzLEL+JyNdOg==
+"@editorjs/checklist@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/checklist/-/checklist-1.2.0.tgz#be66a591449ee3871e654803280dc43e14a0ad4e"
+  integrity sha512-guvhP6YB8ha8JpzlHeNOdYSCFoqjumofbcGkLXheW9laU6HTzT9wDNtaCWd6O5rr677UMrJxEntA7CRsnOzrxQ==
 
 "@editorjs/delimiter@^1.1.0":
   version "1.1.0"
