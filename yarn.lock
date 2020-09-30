@@ -1310,10 +1310,10 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
-"@editorjs/list@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.5.0.tgz#8675c82caa25f50744a4b072a7911163ce26bd74"
-  integrity sha512-LzZuJwJ2HxCkuaPrp3zYdQGvMC8dzXjewqWEBZ9mpq0fVwBAse4o9QB2mWvJxZ93UtLqQE7f9vrbHotG2uW9Qg==
+"@editorjs/list@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.6.0.tgz#6e59030ec577b3a0e88b37db118992a8f405eb9a"
+  integrity sha512-2oJ3Nj3lDcIKS6GcrHYHzUUabIjg7zlXTYXQWdEWXevbnM0/fq+4psyI/AYtqbaa3jN+bycPBIW4OG3zD+3d5A==
 
 "@editorjs/marker@^1.2.2":
   version "1.2.2"
