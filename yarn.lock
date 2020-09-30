@@ -1270,10 +1270,10 @@
   resolved "https://registry.yarnpkg.com/@editorjs/checklist/-/checklist-1.2.0.tgz#be66a591449ee3871e654803280dc43e14a0ad4e"
   integrity sha512-guvhP6YB8ha8JpzlHeNOdYSCFoqjumofbcGkLXheW9laU6HTzT9wDNtaCWd6O5rr677UMrJxEntA7CRsnOzrxQ==
 
-"@editorjs/delimiter@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/delimiter/-/delimiter-1.1.0.tgz#f61808ea92e4e289607d54441964f1cb8605410a"
-  integrity sha512-0G36vEvvb94g6nu/qs2rVjC/qjxLnY20OfOgxROKSOOXzS7xnkTij5raeIxRiYueeLL5fMrzrvtFH7wclfxF+g==
+"@editorjs/delimiter@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/delimiter/-/delimiter-1.2.0.tgz#5075f1a3e68765cfb6aec8694b316d81e2b41607"
+  integrity sha512-GKsCFPk85vH5FuCuVQ48NTLc9hk0T3DsBH9zABaicTYIJayFcUa8N4/Y+L3i4tduzDqqyvoxkv+5n43GmC5gEA==
 
 "@editorjs/editorjs@^2.18.0":
   version "2.18.0"
