@@ -6,7 +6,7 @@
     "@bomdi/codebox": "^1.0.10",
     "@chakra-ui/core": "^0.8.0",
     "@editorjs/checklist": "^1.2.0",
-    "@editorjs/delimiter": "^1.1.0",
+    "@editorjs/delimiter": "^1.2.0",
     "@editorjs/editorjs": "^2.18.0",
     "@editorjs/embed": "^2.4.0",
     "@editorjs/header": "^2.5.0",
