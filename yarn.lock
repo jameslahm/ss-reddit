@@ -1288,10 +1288,10 @@
   resolved "https://registry.yarnpkg.com/@editorjs/embed/-/embed-2.4.0.tgz#589a579df9766f5f675af0f39408eb862fd5b4f3"
   integrity sha512-sGX0KfPszeGBrlBYlgB1vPn/RYRQ/ORcEb9C2kUnFpmRU+R2yb7t+YD9r4DceTyODTK91imYx1YczMlBewGLDA==
 
-"@editorjs/header@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.5.0.tgz#f6266d5b7e639fc38289291160f9c41ab12d9da5"
-  integrity sha512-7j8g5/pjb7WtzjpANai/BoUK4QnZdNLt6Q4YRWL8xfLfUtN2M6zEfV11TuEh/l6eZlO0f/5vkXDFXDsbfeJfDA==
+"@editorjs/header@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@editorjs/header/-/header-2.6.0.tgz#64d1c6af7eefd7ad272d12dbf7ccef8b56771240"
+  integrity sha512-1psNX/irDjJ8Bp1l7DjkYWz7IBtjVIRANk7kPkNoY2CfAeeCFYbJmMlXdqTF2WeAjYv2WMy5ey/aR5fTccgFaw==
 
 "@editorjs/image@^2.6.0":
   version "2.6.0"
