@@ -7,7 +7,7 @@
     "@chakra-ui/core": "^0.8.0",
     "@editorjs/checklist": "^1.2.0",
     "@editorjs/delimiter": "^1.2.0",
-    "@editorjs/editorjs": "^2.18.0",
+    "@editorjs/editorjs": "^2.19.0",
     "@editorjs/embed": "^2.4.0",
     "@editorjs/header": "^2.6.0",
     "@editorjs/image": "^2.6.0",
