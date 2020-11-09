@@ -1429,10 +1429,10 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
-"@editorjs/list@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.6.0.tgz#6e59030ec577b3a0e88b37db118992a8f405eb9a"
-  integrity sha512-2oJ3Nj3lDcIKS6GcrHYHzUUabIjg7zlXTYXQWdEWXevbnM0/fq+4psyI/AYtqbaa3jN+bycPBIW4OG3zD+3d5A==
+"@editorjs/list@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.6.1.tgz#1ca397bb687457ecc50c98a473338470a58d8df8"
+  integrity sha512-9f24qApHmvUOq1tvAmwYS2dQIh1LGwsWJFVYNci0R4HIES848kmspfUS8p1ATJv2msogugeFDz1k3KQ5fZSCzw==
 
 "@editorjs/marker@^1.2.2":
   version "1.2.2"
