@@ -36,7 +36,7 @@
     "react-dom": "^16.14.0",
     "react-editor-js": "^1.6.2",
     "react-html-parser": "^2.0.2",
-    "react-icons": "^3.11.0",
+    "react-icons": "^4.0.0",
     "react-query": "^2.26.3",
     "react-query-devtools": "^2.6.3",
     "react-scripts": "4.0.1",
