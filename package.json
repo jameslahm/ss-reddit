@@ -27,7 +27,7 @@
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
-    "editorjs-react-renderer": "^2.4.0",
+    "editorjs-react-renderer": "^2.5.0",
     "emotion-theming": "^10.0.27",
     "html-metadata": "^1.7.1",
     "http-proxy": "^1.18.1",
