@@ -34,7 +34,7 @@
     "query-string": "^6.13.8",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "react-editor-js": "^1.7.0",
+    "react-editor-js": "^1.8.0",
     "react-html-parser": "^2.0.2",
     "react-icons": "^4.1.0",
     "react-query": "^2.26.4",
