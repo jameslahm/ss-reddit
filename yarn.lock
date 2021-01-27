@@ -10832,10 +10832,10 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-editor-js@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-editor-js/-/react-editor-js-1.8.0.tgz#911112ef6efd351c2075495af7b63054daa3a88d"
-  integrity sha512-SfiSnu2Xi7nWvJ56K4w13goV7o33BkEq22/fc0S6urUVHIM49lcRY3eMKZV7Tr83g2X9xIiirAdrRBjmh46/Jg==
+react-editor-js@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/react-editor-js/-/react-editor-js-1.9.0.tgz#cfe80e3bf01fe0b0f06939826c7778c2ae3b96f3"
+  integrity sha512-Frg7cTO5cM6oFJF+cb3y/qhMc6e6ipEJi+EkiER2ajn19CmYxg+c+vttuGJIxXc5TE/ZzTTuTM5PqP1MjmCR3A==
 
 react-error-overlay@^6.0.8:
   version "6.0.8"
