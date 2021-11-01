@@ -43,7 +43,7 @@
     "react-textarea-autosize": "^8.3.2",
     "rehype-highlight": "^4.1.0",
     "rehype-katex": "^4.0.0",
-    "rehype-sanitize": "^4.0.0",
+    "rehype-sanitize": "^5.0.0",
     "rehype-stringify": "^8.0.0",
     "remark": "^13.0.0",
     "remark-emoji": "^2.1.0",
