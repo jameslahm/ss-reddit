@@ -1945,10 +1945,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bomdi/codebox@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@bomdi/codebox/-/codebox-1.0.10.tgz#7bbae2d0a8276364481f7b96782d910a092d9f66"
-  integrity sha512-6nO2ZkV4CVzxeBmat6hbI7ixCszWI8mzT/FGBztWqSJ21Zw4SAeyHZY5z3VXM8a8n8qQMeT4QS94AG0hkXINGA==
+"@bomdi/codebox@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@bomdi/codebox/-/codebox-2.0.0.tgz#abddc7aa556c5a47458dd3bcdd9ab299bafb6f99"
+  integrity sha512-t1xjfur4wAWfKsoS+KkeARUVxBM43QwIMVxqEmhEhyCI7ixhFSBtda8FWZ9udk/+SRdM6gXPaxd2/yUQfEuDbA==
 
 "@chakra-ui/core@^0.8.0":
   version "0.8.0"
