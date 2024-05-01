@@ -2146,10 +2146,10 @@
     codex-notifier "^1.1.2"
     codex-tooltip "^1.0.1"
 
-"@editorjs/embed@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@editorjs/embed/-/embed-2.4.0.tgz#589a579df9766f5f675af0f39408eb862fd5b4f3"
-  integrity sha512-sGX0KfPszeGBrlBYlgB1vPn/RYRQ/ORcEb9C2kUnFpmRU+R2yb7t+YD9r4DceTyODTK91imYx1YczMlBewGLDA==
+"@editorjs/embed@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@editorjs/embed/-/embed-2.7.1.tgz#4aa5ad459fe43c02520adaaa8161cccb616e6376"
+  integrity sha512-wcL/DatRLMRSDwzHUWsp+c+3ZnDQcExi2RC6uhxLR6eavseNUo5zU02cN3Qw4ts8pQEU9adfUWj1U8sukkBQFw==
 
 "@editorjs/header@^2.6.1":
   version "2.6.1"
