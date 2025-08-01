@@ -1980,6 +1980,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@codexteam/icons@^0.3.2":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@codexteam/icons/-/icons-0.3.3.tgz#89d53af1d2bfc106e4e44be5fd824a059e94c098"
+  integrity sha512-cp7mkZPgmBuSxigTm3Vb+DtVHYeX7qXfQd7o05vcLD8Ag5WvRlol2QSn5P10k0CDAJwmkH9nQGQLBycErS9lsQ==
+
 "@commitlint/cli@^12.0.1":
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-12.0.1.tgz#8960e34e8f1aed8b2ea50f223ee817fdf2264ffb"
@@ -2173,10 +2178,12 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
-"@editorjs/list@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-1.6.2.tgz#38cb307d78ec8b6c55480c538805cdc2ff250ad1"
-  integrity sha512-OxowV0yuE11G01czYM1dEQlz1F37ehX0ak5vAbZ9ncSXrPh0fDRw/fBxTY654FlmrsQ40UFom3owSG++tLvVGw==
+"@editorjs/list@^2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@editorjs/list/-/list-2.0.8.tgz#7a6628963f7ed306ab6f1968fa4b1899dce0f9a8"
+  integrity sha512-/EJNvpeJYa1YDtYa85ug9R3sbDyI5ZlMHQ2bIh5S9iPa19qXe45jk6kgcew+jMNQq3j4NS4Q6YeeFbU1QkNMWw==
+  dependencies:
+    "@codexteam/icons" "^0.3.2"
 
 "@editorjs/marker@^1.2.2":
   version "1.2.2"
